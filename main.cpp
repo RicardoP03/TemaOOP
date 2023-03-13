@@ -65,7 +65,7 @@ class Season{
             os << "Numele sezonului este: " << sez.name << "\n";
             os << "Sezonul are " << sez.nrEpisodes << " episoade\n";
             os << "Lista Episoadelor:\n\n";
-            for(int i = 0; i < sez.episodes.size(); i++){
+            for(unsigned int i = 0; i < sez.episodes.size(); i++){
                 os << sez.episodes[i] << "\n";
             }
             return os;
@@ -178,7 +178,7 @@ class Anime{
             os << "Numele Animeului este: " << an.name << "\n";
             os << "Animeul are " << an.nrSeasons << " sezoane\n";
             os << "Lista sezoanelor:\n\n";
-            for(int i = 0; i < an.seasons.size() ; i++){
+            for(unsigned int i = 0; i < an.seasons.size() ; i++){
                 os << an.seasons[i] << "\n";
             }
             return os;
@@ -222,7 +222,6 @@ int main() {
     s2.add_episode(e8);
     Anime a1 = {"Viollet Evergarden"};
     a1.add_season(s1);
-    std::cout << a1;
     a1.add_season(s2);
     std::cout << a1;
     return 0;
