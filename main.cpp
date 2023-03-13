@@ -46,10 +46,7 @@ class Season{
             std::cout << "Sezonul a fost adaugat\n";
         }
 
-        Season(const Season&other){
-            name = other.name;
-            nrEpisodes = other.nrEpisodes;
-            this->episodes = other.episodes;
+        Season(const Season&other): name{other.name}, nrEpisodes{other.nrEpisodes}, episodes{other.episodes}{
             std::cout << "Constructor copiere Sezon\n";
         }
 
@@ -72,9 +69,7 @@ class Season{
         }
 
         ~Season(){
-//            for(int i = 0; i < nrEpisodes; i++){
-//                delete &episodes[i];
-//            }
+            episodes.clear();
             std::cout << "Sezonul a fost sters\n";
         }
 
@@ -159,10 +154,7 @@ class Anime{
             std::cout << "Animeul a fost adaugat\n";
         }
 
-        Anime(const Anime& an){
-            name = an.name;
-            nrSeasons = an.nrSeasons;
-            this->seasons = an.seasons;
+        Anime(const Anime& an): name{an.name}, nrSeasons{an.nrSeasons}, seasons{an.seasons}{
             std::cout << "Constructor copiere Anime\n";
         }
 
@@ -185,9 +177,7 @@ class Anime{
         }
 
         ~Anime(){
-//            for(int i = 0; i < nrSeasons; i++){
-//                delete &seasons[i];
-//            }
+            seasons.clear();
             std::cout << "Animeul a fost sters\n";
         }
 
