@@ -7,6 +7,7 @@ class Episode{
         std::string name;
         int duration;
         friend class Season;
+        friend class Anime;
     public:
         Episode(const std::string& name_ = "Episode", int duration_ = 24) : name{name_}, duration{duration_} {
             std::cout << "Episodul a fost adaugat\n";
@@ -48,14 +49,14 @@ class Season{
         Season(const Season&other){
             name = other.name;
             nrEpisodes = other.nrEpisodes;
-            std::vector<Episode> episodes(other.episodes);
+            this->episodes = other.episodes;
             std::cout << "Constructor copiere Sezon\n";
         }
 
         Season& operator=(const Season&other){
             name = other.name;
             nrEpisodes = other.nrEpisodes;
-            std::vector<Episode> episodes(other.episodes);
+            this->episodes = other.episodes;
             std::cout << "operator = copiere Sezon\n";
             return *this;
         }
@@ -63,17 +64,17 @@ class Season{
         friend std::ostream& operator<<(std::ostream& os, const Season& sez){
             os << "Numele sezonului este: " << sez.name << "\n";
             os << "Sezonul are " << sez.nrEpisodes << " episoade\n";
-            os << "Lista Episoadelor\n\n";
-            for(int i = 0; i < sez.nrEpisodes; i++){
+            os << "Lista Episoadelor:\n\n";
+            for(int i = 0; i < sez.episodes.size(); i++){
                 os << sez.episodes[i] << "\n";
             }
             return os;
         }
 
         ~Season(){
-            for(int i = 0; i < nrEpisodes; i++){
-                delete &episodes[i];
-            }
+//            for(int i = 0; i < nrEpisodes; i++){
+//                delete &episodes[i];
+//            }
             std::cout << "Sezonul a fost sters\n";
         }
 
@@ -161,14 +162,14 @@ class Anime{
         Anime(const Anime& an){
             name = an.name;
             nrSeasons = an.nrSeasons;
-            std::vector<Season> seasons(an.seasons);
+            this->seasons = an.seasons;
             std::cout << "Constructor copiere Anime\n";
         }
 
         Anime& operator=(const Anime& an){
             name = an.name;
             nrSeasons = an.nrSeasons;
-            std::vector<Season> seasons(an.seasons);
+            this->seasons = an.seasons;
             std::cout << "operator = copiere Anime\n";
             return *this;
         }
@@ -176,17 +177,28 @@ class Anime{
         friend std::ostream& operator<<(std::ostream& os, const Anime& an){
             os << "Numele Animeului este: " << an.name << "\n";
             os << "Animeul are " << an.nrSeasons << " sezoane\n";
-            os << "Lista sezoanelor\n\n";
-            for(int i = 0; i < an.nrSeasons; i++){
+            os << "Lista sezoanelor:\n\n";
+            for(int i = 0; i < an.seasons.size() ; i++){
                 os << an.seasons[i] << "\n";
             }
             return os;
         }
 
         ~Anime(){
+//            for(int i = 0; i < nrSeasons; i++){
+//                delete &seasons[i];
+//            }
             std::cout << "Animeul a fost sters\n";
         }
 
+        void add_season(Season& se){
+            nrSeasons++;
+            if(se.name == "Season"){
+                se.name = "Season " + std::to_string(nrSeasons);
+            }
+            seasons.push_back(se);
+
+        }
 };
 
 int main() {
@@ -199,5 +211,19 @@ int main() {
     s1.add_episode(e2);
     s1.add_episode(e3);
     s1.add_episode(e4);
-    std::cout << s1;
+    Episode e5 = {"Episode 1", 24};
+    Episode e6 = {"Episode 2", 24};
+    Episode e7 = {"Episode 3", 24};
+    Episode e8 = {"Episode 4", 24};;
+    Season s2 = {"Season 2"};
+    s2.add_episode(e5);
+    s2.add_episode(e6);
+    s2.add_episode(e7);
+    s2.add_episode(e8);
+    Anime a1 = {"Viollet Evergarden"};
+    a1.add_season(s1);
+    std::cout << a1;
+    a1.add_season(s2);
+    std::cout << a1;
+    return 0;
 }
