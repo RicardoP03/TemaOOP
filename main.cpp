@@ -331,13 +331,15 @@ int main() {
     acc1.add_review(s1, 8);
     acc2.add_review(s1, 9);
     acc3.add_review(s1, 10);
-    acc1.add_review(s1, 7);
     acc1.add_review(s2, 9);
     acc2.add_review(s2, 9);
     acc3.add_review(s2, 9);
     Anime an1;
     acc2.add_season(an1, s1);
     acc2.add_season(an1, s2);
+    std::cout <<an1;
+    acc1.add_review(s1, 7);
+    an1.ratingUpdate();
     std::cout << an1;
     Manga mg1{"Rent a girlfriend", 270};
     Novel no1{"Konosuba", 17};
