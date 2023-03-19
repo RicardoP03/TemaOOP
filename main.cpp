@@ -174,7 +174,7 @@ class Anime{
     private:
         std::string name;
         int nrSeasons = 0;
-        std::vector<Season> seasons;
+        std::vector<Season*> seasons;
         long double rating = 0;
         friend class Account;
     public:
@@ -200,7 +200,7 @@ class Anime{
             os << "Animeul are ratingul: " << an.rating << "\n";
             os << "Lista sezoanelor:\n\n";
             for(unsigned int i = 0; i < an.seasons.size() ; i++){
-                os << an.seasons[i] << "\n";
+                os << *an.seasons[i] << "\n";
             }
             return os;
         }
@@ -214,7 +214,7 @@ class Anime{
         int getLength(){
             int sum = 0;
             for(unsigned int i = 0; i < seasons.size(); i++){
-                sum += seasons[i].getLength();
+                sum += seasons[i] -> getLength();
             }
             std::cout << "Animeul:" << name << "are lungimea totala de " << sum << "minute\n";
             return sum;
@@ -224,7 +224,7 @@ class Anime{
         void ratingUpdate(){
             long double sum = 0;
             for(unsigned int i = 0; i < seasons.size(); i++){
-                sum += seasons[i].rating;
+                sum += seasons[i] -> rating;
             }
             rating = sum / nrSeasons;
             std::cout << "Animeul are ratingul: " << rating << "\n";
@@ -284,7 +284,7 @@ class Account{
                 if (se.name == "Season") { // setam numele la cel conrespunzator daca un nume nu a fost oferit la creearea obiectulu season
                     se.name = "Season " + std::to_string(an.nrSeasons);
                 }
-                an.seasons.push_back(se);
+                an.seasons.push_back(&se);
                 //recalculam ratigul dupa noul sezon adaugat
                 an.rating = an.rating * (an.nrSeasons - 1);
                 an.rating += se.rating;
@@ -307,7 +307,7 @@ class Account{
 
         //functia aduaga un review la un sezon
         void add_review(Season& se, const int& rating){
-            if(rating <= 0 || rating >= 10){ //verificam daca valoarea este corespunzatoare
+            if(rating < 0 || rating > 10){ //verificam daca valoarea este corespunzatoare
                 std::cout << "Valoare invalida pentru rating\n";
             }
             else{
@@ -352,10 +352,12 @@ int main() {
     acc1.add_review(s2, 9);
     acc2.add_review(s2, 9);
     acc3.add_review(s2, 9);
-    Anime an1;
+    Anime an1{"Viollet Evergarden"};
     acc2.add_season(an1, s1);
     acc2.add_season(an1, s2);
-    std::cout <<an1;
+    acc1.add_review(s2, 10);
+    an1.ratingUpdate();
+    std::cout << an1;
     Manga mg1{"Rent a girlfriend", 270};
     Novel no1{"Konosuba", 17};
     std::cout << mg1;
