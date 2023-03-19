@@ -20,7 +20,7 @@ Clasa Novel:
 -momentan nu are nici o utilizare larga, o sa aiba in temele viitoare.  
 
 Clasa Anime:  
--cotine variabilele locale: Name(reprezetand numele unui anime), nrSeasons reprezetand numarul de sezoane, este incarcat cu 0 mereu si poate fi modificat numai cu functia add_season din clasa Account, seasons reprezinta un vector de obiecte de timp Season care reprezinta sezoanele animeului si rating este ratingul animeului si este calculat ca find valoarea medie a ratingului unui sezon.  
+-cotine variabilele locale: Name(reprezetand numele unui anime), nrSeasons reprezetand numarul de sezoane, este incarcat cu 0 mereu si poate fi modificat numai cu functia add_season din clasa Account, seasons reprezinta un vector de pointer catre obiecte de timp Season care reprezinta sezoanele animeului si rating este ratingul animeului si este calculat ca find valoarea medie a ratingului unui sezon.  
 -constructorul clasei primeste doar un string si seteaza valoarea numelui la acest string.  
 -contine functia getLegth care calculeaza lungimea totala a animeului adunand lungimea tuturor sezoaenelor, apoi o afiseaza pe ecran si o returneaza  
 -contine functia ratingUpdate care recalculeaza ratingul unui anime si poate fi apelata la modificarea ratingului unui sezon  
