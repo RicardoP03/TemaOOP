@@ -5,6 +5,10 @@
 #include <map>
 #include <memory>
 
+//Am oferit o descriere mai ambla in Readme
+
+
+//clasa reprezinta un episod dintr-un anime
 class Episode{
     private:
         std::string name;
@@ -39,18 +43,20 @@ class Episode{
         }
 };
 
+
+//reprezinta un sezon care este compus din mai multe episoade si are un rating
 class Season{
     private:
         std::string name;
-        int nrEpisodes;
+        int nrEpisodes = 0;
         std::vector<Episode> episodes;
-        std::map<std::string, int> reviews;
+        std::map<std::string, int> reviews; // mapa folosit pentru a stoca review-urile
         int sumOfRatings = 0, nrReviews = 0;
         long double rating = 0;
         friend class Anime;
         friend class Account;
     public:
-        Season(const std::string& name_ = "Season"): name{name_}, nrEpisodes{0}{
+        Season(const std::string& name_ = "Season"): name{name_}{
             std::cout << "Sezonul a fost adaugat\n";
         }
 
@@ -87,6 +93,7 @@ class Season{
             std::cout << "Sezonul a fost sters\n";
         }
 
+        //functie care calculeaza lungimea totala a unui sezon
         int getLength(){
             int sum = 0;
             for(unsigned int i = 0; i < episodes.size(); i++){
@@ -97,6 +104,7 @@ class Season{
         }
 };
 
+//repezinta o serie mang amomentan nu are o utilizare ampla
 class Manga{
     private:
         std::string name;
@@ -128,6 +136,7 @@ class Manga{
 
 };
 
+//clasa reprezinta un roman, momentan nu are o utilizare mai ampla
 class Novel{
     private:
         std::string name;
@@ -159,15 +168,17 @@ class Novel{
        }
 };
 
+//clasa Anime, reprezinta un anime care este format din mai multe sezoane si are ratingul ca find media
+//ratingurilor sezoanelor
 class Anime{
     private:
         std::string name;
-        int nrSeasons;
+        int nrSeasons = 0;
         std::vector<Season> seasons;
         long double rating = 0;
         friend class Account;
     public:
-        Anime(const std::string& name_ = "Anime"): name{name_}, nrSeasons{0}{
+        Anime(const std::string& name_ = "Anime"): name{name_}{
             std::cout << "Animeul a fost adaugat\n";
         }
 
@@ -199,6 +210,7 @@ class Anime{
             std::cout << "Animeul a fost sters\n";
         }
 
+        //calculeaza lungimea totala a unui anime
         int getLength(){
             int sum = 0;
             for(unsigned int i = 0; i < seasons.size(); i++){
@@ -208,6 +220,7 @@ class Anime{
             return sum;
         }
 
+        //recalculeaza raingul animeului
         void ratingUpdate(){
             long double sum = 0;
             for(unsigned int i = 0; i < seasons.size(); i++){
@@ -218,25 +231,26 @@ class Anime{
         }
 };
 
+//clasa Account reprezinta un cont care poate sa faca modificari in functie de rolul pe care il are
 class Account{
     private:
         std::string name, rol, password;
-        static std::map<std::string, std::shared_ptr<Account>> accounts;
+        static std::map<std::string, std::shared_ptr<Account>> accounts; // mapa folosita sa verificam daca numele sunt unice
     public:
         Account(const std::string& name_, const std::string& rol_, const std::string& password_):name{name_}, rol{rol_}, password{password_}{
-            if(rol != "ADMIN") rol = "USER";
+            if(rol != "ADMIN") rol = "USER"; //daca rolul este diferit de "ADMIN", il setam automat la "USER"
             try {
-                if (Account::accounts.find(name) != Account::accounts.end()) {
-                    std::cout << "Contul cu numele " << name << " exista deja\n";
+                if (Account::accounts.find(name) != Account::accounts.end()) { // verificam daca un cont cu acest nume exista
+                    std::cout << "Contul cu numele " << name << " exista deja\n"; //afisem un mesaj si o eroare corespunzatoare
                     throw std::invalid_argument("Numele contului este deja folosit");
                 }
                 else {
-                    accounts[name] = std::make_shared<Account>(*this);
+                    accounts[name] = std::make_shared<Account>(*this); //daca nu este il aduagam in mapa
                     std::cout << "Contul cu numele " << name << " a fost creat\n";
                 }
             }
             catch (const std::invalid_argument &e) {
-                std::cout << "Caught exception: " << e.what() << std::endl;
+                std::cout << "Caught exception: " << e.what() << std::endl; // afisem mesajul de eroare
             }
         }
 
@@ -263,14 +277,15 @@ class Account{
             std::cout<< "Contul a fost sters\n";
         }
 
-
+        //functie care adauga un sezon
         void add_season(Anime& an, Season& se){
-            if(rol == "ADMIN") {
+            if(rol == "ADMIN") { //verificam daca contul are rolul necesar
                 an.nrSeasons++;
-                if (se.name == "Season") {
+                if (se.name == "Season") { // setam numele la cel conrespunzator daca un nume nu a fost oferit la creearea obiectulu season
                     se.name = "Season " + std::to_string(an.nrSeasons);
                 }
                 an.seasons.push_back(se);
+                //recalculam ratigul dupa noul sezon adaugat
                 an.rating = an.rating * (an.nrSeasons - 1);
                 an.rating += se.rating;
                 an.rating = an.rating / an.nrSeasons;
@@ -278,10 +293,11 @@ class Account{
             else std::cout << "Nu aveti permisiunea de a face modificari\n";
         }
 
+        //functia adauga un episod
         void add_episode(Season& se, Episode& ep) {
-            if (rol == "ADMIN") {
+            if (rol == "ADMIN") { // verificam daca contula re rolul necesar
                 se.nrEpisodes++;
-                if (ep.name == "Episode") {
+                if (ep.name == "Episode") { // verificam daca un nume a fost oferit la crearea episodului daca nu ii oferim un nume corespunzator
                     ep.name = "Episode " + std::to_string(se.nrEpisodes);
                 }
                 se.episodes.push_back(ep);
@@ -289,15 +305,17 @@ class Account{
             else std::cout << "Nu aveti permisiunea de a face modificari\n";
         }
 
+        //functia aduaga un review la un sezon
         void add_review(Season& se, const int& rating){
-            if(rating <= 0 || rating >= 10){
+            if(rating <= 0 || rating >= 10){ //verificam daca valoarea este corespunzatoare
                 std::cout << "Valoare invalida pentru rating\n";
             }
             else{
+                //updatam ratingul cu noul review adaugat
+                if(se.reviews.count(name) == 0) se.nrReviews++;
                 int oldVal = se.reviews[name];
                 se.reviews[name] = rating;
                 se.sumOfRatings += rating - oldVal;
-                se.nrReviews++;
                 se.rating = 1.0 * se.sumOfRatings / se.nrReviews;
             }
         }
@@ -338,9 +356,6 @@ int main() {
     acc2.add_season(an1, s1);
     acc2.add_season(an1, s2);
     std::cout <<an1;
-    acc1.add_review(s1, 7);
-    an1.ratingUpdate();
-    std::cout << an1;
     Manga mg1{"Rent a girlfriend", 270};
     Novel no1{"Konosuba", 17};
     std::cout << mg1;
