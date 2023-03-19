@@ -340,7 +340,7 @@ int main() {
     Episode e5 = {"Episode 1", 24};
     Episode e6 = {"Episode 2", 24};
     Episode e7 = {"Episode 3", 24};
-    Episode e8 = {"Episode 4", 24};;
+    Episode e8 = {"Episode 4", 24};
     Season s2 = {"Season 2"};
     acc2.add_episode(s2, e5);
     acc2.add_episode(s2, e6);
