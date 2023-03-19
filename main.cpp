@@ -346,8 +346,8 @@ int main() {
     acc2.add_episode(s2, e6);
     acc2.add_episode(s2, e7);
     acc2.add_episode(s2, e8);
-    acc1.add_review(s1, 8);
-    acc2.add_review(s1, 9);
+    acc1.add_review(s1, 9);
+    acc2.add_review(s1, 8);
     acc3.add_review(s1, 10);
     acc1.add_review(s2, 9);
     acc2.add_review(s2, 9);
