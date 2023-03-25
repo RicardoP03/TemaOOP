@@ -2,8 +2,10 @@ Tema contine o serie de clase care indeplinesc anumite functionalitatati ale unu
 Ea este compusa din urmatoarele clase:  
 
 Clasa Episode:  
-- contine variabile private name si duration care reprezinta numele, daca un nume nu este oferit acesta este initializat cu numele "Episode", durata, daca o durata nu este oferita este initializat cu valoare 24 din constructor.  
-- nu are nici o functie inafara de cele standard obligatori  
+- contine variabilele private:
+      - name care reprezinta numele unui episod, daca un nume nu este oferit acesta este initializat cu numele "Episode".
+      - duration care reprezinta lungimea unui episod in minute, daca o durata nu este oferita este initializat cu valoare 24 din constructor.  
+- ca functii in plus de cele standard mai contine getteri pentru name si duration si setter pentru name.
   
 Clasa Season:  
 - contine variabilele locale: name, se refera la numele unui sezon, daca un nume nu este oferit se initializata cu numele "season", nrEpisodes, este intializat mereu cu 0 cand un sezon este creat, episodes, este un vector care contine obiecte de tipul Episode si reprezinta lista de episoade din sezon, reviews reprezinta review-urile primite de sezonul, acest sunt adaugate din apelul functiei add_review din class account, acestea sunt salvate subforma unei mapa cu cheia nume si ratingul review-ului astfel un cont poate avea un sigur review(numele sunt unice) si acesta este updatat cand se mai apeleaza odata functia add_review asupra obiectului de tip account, sumOfReviews si nrReviews reprezinta suma valorile tuturor review-urilor, ele sunt intializate cu valoarea 0 si sunt updatate doar din apelul fuctiei add_review, respectiv numarul lor, mai contine si variabila rating care reprezint ratingul sezonului si este calculat ca find sumOfRating / nrReviews.  
