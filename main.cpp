@@ -49,7 +49,7 @@ class Episode{
             return duration;
         }
 
-        void setName(std::string newName){
+        void setName(std::string& newName){
             name = newName;
         }
 };
@@ -132,7 +132,7 @@ class Season{
         return rating;
     }
 
-    void setName(std::string newName){
+    void setName(std::string& newName){
         name = newName;
     }
 };
