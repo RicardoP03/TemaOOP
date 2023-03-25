@@ -3,6 +3,8 @@
 #include <vector>
 #include <stdexcept>
 #include <map>
+#include <set>
+#include <iterator>
 #include <memory>
 
 //Am oferit o descriere mai ambla in Readme
@@ -13,9 +15,6 @@ class Episode{
     private:
         std::string name;
         int duration;
-        friend class Season;
-        friend class Anime;
-        friend class Account;
     public:
         Episode(const std::string& name_ = "Episode", int duration_ = 24) : name{name_}, duration{duration_} {
             std::cout << "Episodul a fost adaugat\n";
@@ -41,6 +40,18 @@ class Episode{
         ~Episode(){
             std::cout << "Episodul a fost sters\n";
         }
+
+        std::string getName(){
+            return name;
+        }
+
+        int getDuration(){
+            return duration;
+        }
+
+        void setName(std::string newName){
+            name = newName;
+        }
 };
 
 
@@ -48,26 +59,22 @@ class Episode{
 class Season{
     private:
         std::string name;
-        int nrEpisodes = 0;
         std::vector<Episode> episodes;
         std::map<std::string, int> reviews; // mapa folosit pentru a stoca review-urile
         int sumOfRatings = 0, nrReviews = 0;
         long double rating = 0;
-        friend class Anime;
-        friend class Account;
     public:
         Season(const std::string& name_ = "Season"): name{name_}{
             std::cout << "Sezonul a fost adaugat\n";
         }
 
-        Season(const Season&other): name{other.name}, nrEpisodes{other.nrEpisodes}, episodes{other.episodes},
+        Season(const Season&other): name{other.name}, episodes{other.episodes},
         reviews{other.reviews}, sumOfRatings{other.sumOfRatings}, nrReviews{other.nrReviews}, rating{other.rating}{
             std::cout << "Constructor copiere Sezon\n";
         }
 
         Season& operator=(const Season&other){
             name = other.name;
-            nrEpisodes = other.nrEpisodes;
             this->episodes = other.episodes;
             this->reviews = other.reviews;
             sumOfRatings = other.sumOfRatings;
@@ -79,7 +86,7 @@ class Season{
 
         friend std::ostream& operator<<(std::ostream& os, const Season& sez){
             os << "Numele sezonului este: " << sez.name << "\n";
-            os << "Sezonul are " << sez.nrEpisodes << " episoade\n";
+            os << "Sezonul are " << sez.episodes.size() << " episoade\n";
             os << "Seazonul are ratingul de: " << sez.rating <<  " obtinut din " << sez.nrReviews << " recenzi" << "\n";
             os << "Lista Episoadelor:\n\n";
             for(unsigned int i = 0; i < sez.episodes.size(); i++){
@@ -89,7 +96,6 @@ class Season{
         }
 
         ~Season(){
-            episodes.clear();
             std::cout << "Sezonul a fost sters\n";
         }
 
@@ -97,11 +103,38 @@ class Season{
         int getLength(){
             int sum = 0;
             for(unsigned int i = 0; i < episodes.size(); i++){
-                sum += episodes[i].duration;
+                sum += episodes[i].getDuration();
             }
-            std::cout << name << "are lungimea totala de " << sum << "minute\n";
             return sum;
         }
+
+        void add_episode(Episode& ep){
+            if (ep.getName() == "Episode") { // verificam daca un nume a fost oferit la crearea episodului daca nu ii oferim un nume corespunzator
+                std::string aux = "Episode " + std::to_string(episodes.size());
+                ep.setName(aux);
+            }
+            episodes.push_back(ep);
+        }
+
+        void add_review(const std::string& accountName, const int& rate){
+            if(reviews.count(accountName) == 0) nrReviews++;
+            int oldVal = reviews[accountName];
+            reviews[name] = rate;
+            sumOfRatings += rate - oldVal;
+            rating = 1.0 * sumOfRatings / episodes.size();
+        }
+
+    std::string getName(){
+        return name;
+    }
+
+    int getRating(){
+        return rating;
+    }
+
+    void setName(std::string newName){
+        name = newName;
+    }
 };
 
 //repezinta o serie mang amomentan nu are o utilizare ampla
@@ -173,40 +206,37 @@ class Novel{
 class Anime{
     private:
         std::string name;
-        int nrSeasons = 0;
-        std::vector<Season*> seasons;
+        std::vector<Season> seasons;
         long double rating = 0;
-        friend class Account;
     public:
         Anime(const std::string& name_ = "Anime"): name{name_}{
             std::cout << "Animeul a fost adaugat\n";
         }
 
-        Anime(const Anime& an): name{an.name}, nrSeasons{an.nrSeasons}, seasons{an.seasons}{
+        Anime(const Anime& an): name{an.name}, seasons{an.seasons}, rating{an.rating}{
             std::cout << "Constructor copiere Anime\n";
         }
 
         Anime& operator=(const Anime& an){
             name = an.name;
-            nrSeasons = an.nrSeasons;
             this->seasons = an.seasons;
+            rating = an.rating;
             std::cout << "operator = copiere Anime\n";
             return *this;
         }
 
         friend std::ostream& operator<<(std::ostream& os, const Anime& an){
             os << "Numele Animeului este: " << an.name << "\n";
-            os << "Animeul are " << an.nrSeasons << " sezoane\n";
+            os << "Animeul are " << an.seasons.size() << " sezoane\n";
             os << "Animeul are ratingul: " << an.rating << "\n";
             os << "Lista sezoanelor:\n\n";
             for(unsigned int i = 0; i < an.seasons.size() ; i++){
-                os << *an.seasons[i] << "\n";
+                os << an.seasons[i] << "\n";
             }
             return os;
         }
 
         ~Anime(){
-            seasons.clear();
             std::cout << "Animeul a fost sters\n";
         }
 
@@ -214,9 +244,8 @@ class Anime{
         int getLength(){
             int sum = 0;
             for(unsigned int i = 0; i < seasons.size(); i++){
-                sum += seasons[i] -> getLength();
+                sum += seasons[i].getLength();
             }
-            std::cout << "Animeul:" << name << "are lungimea totala de " << sum << "minute\n";
             return sum;
         }
 
@@ -224,18 +253,34 @@ class Anime{
         void ratingUpdate(){
             long double sum = 0;
             for(unsigned int i = 0; i < seasons.size(); i++){
-                sum += seasons[i] -> rating;
+                sum += seasons[i].getRating();
             }
-            rating = sum / nrSeasons;
+            rating = sum / seasons.size();
             std::cout << "Animeul are ratingul: " << rating << "\n";
         }
+
+        void add_season(Season &se){
+            if (se.getName() == "Season") { // setam numele la cel conrespunzator daca un nume nu a fost oferit la creearea obiectulu season
+                std::string aux = "Season " + std::to_string(seasons.size());
+                se.setName(aux);
+            }
+            seasons.push_back(se);
+            //recalculam ratigul dupa noul sezon adaugat
+            rating = rating * (seasons.size() - 1);
+            rating += se.getRating();
+            rating = rating / seasons.size();
+        }
+
+        std::string getName(){
+            return name;
+        };
 };
 
 //clasa Account reprezinta un cont care poate sa faca modificari in functie de rolul pe care il are
 class Account{
     private:
         std::string name, rol, password;
-        static std::map<std::string, std::shared_ptr<Account>> accounts; // mapa folosita sa verificam daca numele sunt unice
+        static std::set<std::string> accounts; // mapa folosita sa verificam daca numele sunt unice
     public:
         Account(const std::string& name_, const std::string& rol_, const std::string& password_):name{name_}, rol{rol_}, password{password_}{
             if(rol != "ADMIN") rol = "USER"; //daca rolul este diferit de "ADMIN", il setam automat la "USER"
@@ -245,7 +290,7 @@ class Account{
                     throw std::invalid_argument("Numele contului este deja folosit");
                 }
                 else {
-                    accounts[name] = std::make_shared<Account>(*this); //daca nu este il aduagam in mapa
+                    accounts.insert(name); //daca nu este il aduagam in mapa
                     std::cout << "Contul cu numele " << name << " a fost creat\n";
                 }
             }
@@ -280,15 +325,7 @@ class Account{
         //functie care adauga un sezon
         void add_season(Anime& an, Season& se){
             if(rol == "ADMIN") { //verificam daca contul are rolul necesar
-                an.nrSeasons++;
-                if (se.name == "Season") { // setam numele la cel conrespunzator daca un nume nu a fost oferit la creearea obiectulu season
-                    se.name = "Season " + std::to_string(an.nrSeasons);
-                }
-                an.seasons.push_back(&se);
-                //recalculam ratigul dupa noul sezon adaugat
-                an.rating = an.rating * (an.nrSeasons - 1);
-                an.rating += se.rating;
-                an.rating = an.rating / an.nrSeasons;
+                an.add_season(se);
             }
             else std::cout << "Nu aveti permisiunea de a face modificari\n";
         }
@@ -296,11 +333,7 @@ class Account{
         //functia adauga un episod
         void add_episode(Season& se, Episode& ep) {
             if (rol == "ADMIN") { // verificam daca contula re rolul necesar
-                se.nrEpisodes++;
-                if (ep.name == "Episode") { // verificam daca un nume a fost oferit la crearea episodului daca nu ii oferim un nume corespunzator
-                    ep.name = "Episode " + std::to_string(se.nrEpisodes);
-                }
-                se.episodes.push_back(ep);
+                se.add_episode(ep);
             }
             else std::cout << "Nu aveti permisiunea de a face modificari\n";
         }
@@ -312,16 +345,12 @@ class Account{
             }
             else{
                 //updatam ratingul cu noul review adaugat
-                if(se.reviews.count(name) == 0) se.nrReviews++;
-                int oldVal = se.reviews[name];
-                se.reviews[name] = rating;
-                se.sumOfRatings += rating - oldVal;
-                se.rating = 1.0 * se.sumOfRatings / se.nrReviews;
+                se.add_review(name, rating);
             }
         }
 };
 
-std::map<std::string, std::shared_ptr<Account>> Account::accounts;
+std::set<std::string> Account::accounts;
 
 int main() {
     Account acc1("John", "USER", "password1");
@@ -358,6 +387,7 @@ int main() {
     acc1.add_review(s2, 10);
     an1.ratingUpdate();
     std::cout << an1;
+    std::cout << "Animeul:" << an1.getName() << "are lungimea totala de " << an1.getLength() << " minute\n";
     Manga mg1{"Rent a girlfriend", 270};
     Novel no1{"Konosuba", 17};
     std::cout << mg1;
