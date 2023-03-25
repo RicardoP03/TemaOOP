@@ -3,8 +3,8 @@ Ea este compusa din urmatoarele clase:
 
 Clasa Episode:  
 - contine variabilele private:
-      * name care reprezinta numele unui episod, daca un nume nu este oferit acesta este initializat cu numele "Episode".
-      * duration care reprezinta lungimea unui episod in minute, daca o durata nu este oferita este initializat cu valoare 24 din constructor.  
+      * name care reprezinta numele unui episod, daca un nume nu este oferit acesta este initializat cu numele "Episode".  
+      * duration care reprezinta lungimea unui episod in minute, daca o durata nu este oferita este initializat cu valoare 24 din constructor.    
 - ca functii in plus de cele standard mai contine getteri pentru name si duration si setter pentru name.
   
 Clasa Season:  
