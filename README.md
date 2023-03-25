@@ -50,7 +50,7 @@ Clasa Account:
   - variabila statica accounts, este un set care ne ajuta sa vedem daca numele unui cont este deja utilizat.  
 - costructorul verifica daca numele este diferit de "ADMIN", daca este il seteaza automat la "USER, apoi verifica daca numele este in mapa, daca returneaza nu mesaj de eroare adecvat care va fi afisat de ecran(try and catch), daca nu este contul este creat.  
 - functia add_season, verifica daca contul care adauga sezonul este admin, daca nu este sezonul nu este adaugat si se afiseaza un mesaj adecvat. Daca contul este cu rolul "ADMIN" se apeleaza functia add_season din clasa anime.  
-- functia add_episode, verifica daca contul care adauga episodul este admin, daca nu este episodul nu este adaugat si se afiseaza un mesaj adecvat. Daca contul este cu rolul "ADMIN" se apeleaza functia add_season din clasa anime.     
+- functia add_episode, verifica daca contul care adauga episodul este admin, daca nu este episodul nu este adaugat si se afiseaza un mesaj adecvat. Daca contul este cu rolul "ADMIN" se apeleaza functia add_episod din clasa anime.     
 - functia add_review verifica ca valoarea reviewului sa fie intre 0 si 10, daca nu este afiseaza un mesaj adecvat si review-ul nu este adaugat, daca este atunci se apeleaza functia add_review din clasa anime.  
 
 Acesta este o scurta descriere a proiectului.
