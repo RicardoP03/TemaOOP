@@ -280,23 +280,16 @@ class Anime{
 class Account{
     private:
         std::string name, rol, password;
-        static std::set<std::string> accounts; // mapa folosita sa verificam daca numele sunt unice
+        static std::map<std::string, int> accounts; // mapa folosita sa verificam daca numele sunt unice
     public:
         Account(const std::string& name_, const std::string& rol_, const std::string& password_):name{name_}, rol{rol_}, password{password_}{
             if(rol != "ADMIN") rol = "USER"; //daca rolul este diferit de "ADMIN", il setam automat la "USER"
-            try {
-                if (Account::accounts.find(name) != Account::accounts.end()) { // verificam daca un cont cu acest nume exista
-                    std::cout << "Contul cu numele " << name << " exista deja\n"; //afisem un mesaj si o eroare corespunzatoare
-                    throw std::invalid_argument("Numele contului este deja folosit");
-                }
-                else {
-                    accounts.insert(name); //daca nu este il aduagam in mapa
-                    std::cout << "Contul cu numele " << name << " a fost creat\n";
-                }
+            if(Account::accounts.find(name) != Account::accounts.end()){
+                accounts[name]++;
+                name = name + '(' + std::to_string(accounts[name]) +')'; // modificam numele
+                std::cout << "Numele exista deja, acesta a fost modificat la: " << name << "\n";
             }
-            catch (const std::invalid_argument &e) {
-                std::cout << "Caught exception: " << e.what() << std::endl; // afisem mesajul de eroare
-            }
+            accounts[name]++; //adaugam numele in mapa (in cazul in care acesta este schimbat tot trebuia mapat)
         }
 
         Account(const Account& other): name{other.name}, rol{other.rol}, password{other.password}{
@@ -350,12 +343,13 @@ class Account{
         }
 };
 
-std::set<std::string> Account::accounts;
+std::map<std::string, int> Account::accounts;
 
 int main() {
     Account acc1("John", "USER", "password1");
     Account acc2("Jane", "ADMIN", "password2");
     Account acc3("Jim", "USER", "password3");
+    Account acc4("Jim", "USER", "password4");
     Episode e1{"Episode 1", 25};
     Episode e2{"Episode", 25};
     Episode e3{"Not coming back", 25};
