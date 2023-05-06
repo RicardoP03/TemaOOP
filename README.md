@@ -10,7 +10,7 @@ Clasa Episode:
 Clasa Season:  
 - contine variabilele private:  
   - name, se refera la numele unui sezon, daca un nume nu este oferit se initializata cu numele "season".  
-  - episodes, este un vector care contine obiecte de tipul Episode si reprezinta lista de episoade din sezon.  
+  - episodes, este un vector de pointeri catre obiecte de tipul Episode si reprezinta lista de episoade din sezon.  
   - reviews reprezinta reviewurile primite de sezonul, acest sunt adaugate din apelul functiei add_review, care se apeleaza din clasa Account dupa ce verificarile necesare au fost realizate, acestea sunt salvate sub forma unei mape cu cheia nume si valoarea rezprezentand ratingul reviewului astfel un cont poate avea un sigur review(numele sunt unice) si acesta este updatat cand se apeleaza inca odata functia add_review asupra obiectului de tip account.  
   - sumOfReviews reprezinta suma valorilor tuturor review-urilor, este intializata cu valoarea 0 si este updatata doar din apelul functiei add_review.  
   - nrReviews reprezinta numarul reviewurilor, care este de asemenea initializata cu valoarea 0 si este updatata doar din apelul functiei add_review.  
@@ -19,38 +19,60 @@ Clasa Season:
 - episoadele sunt aduagate din apelul functiei add_episode dupa ce verificarile necesare au fost facute in clasa Account, daca sezonul are numele standard("Episode"), numele este modificat la "Episode" + numarul adecvat(daca e al 3 lea episodul numarul 3), apoi episodul este adaugat in vectorul de episoade.  
 - add_review adauga un review si este apelata din clasa Account, apoi realizeaza calculele necesare si updateaza valoarea ratingului.  
 - clasa mai contine functia getLength care returneaza suma lungimilor tuturor episoadelor.  
-  
+
+Clasa AnimeInspirationSource:
+- contine variabilele:
+  - name care reprezinta numele seriei pe care este bazat un anime.
+  - author care reprezinta autorul care a scris seria.
+  - content care este un vector care contine partile seriei.
+- Functia addContent adauga element in vectorul content.
+- Functia afisare este folosita pentru a afisa derivatele clasei.
+- Functia clone este una pura virtuala.
+
 Clasa Manga:  
-- contine variabilele private:   
-  - name numele seriei manga.  
-  - nrChapters reprezentand numarul de capitole.   
-- momentan nu are nici o utilizare larga, o sa aiba in temele viitoare.  
+- mosteneste clasa AnimeInspirationSource, nu are variabile in plus.   
+- Functia addContent a fost suprascrisa cu mici modificari.
+- Functia clone a fost suprascrisa pentru a clona un obiect.
   
 Clasa Novel:  
-- contine variabilele private:  
-  - name numele romanului.  
-  - nrChapters reprezentand numarul de volume.  
-- momentan nu are nici o utilizare larga, o sa aiba in temele viitoare.  
+- mosteneste clasa AnimeInspirationSource, nu are variabile in plus.   
+- Functia addContent a fost suprascrisa cu mici modificari.
+- Functia clone a fost suprascrisa pentru a clona un obiect.
 
 Clasa Anime:  
 - cotine variabilele private:  
   - Name reprezinta numele unui anime.  
-  - seasons reprezinta un vector de pointer catre obiecte de timp Season care reprezinta sezoanele animeului.  
-  - rating reprezinta ratingul animeului si este calculat ca find valoarea medie a ratingului unui sezon.  
-- constructorul clasei primeste doar un string si seteaza valoarea numelui la acest string.  
+  - seasons reprezinta un vector de pointeri catre obiecte de tip Season care reprezinta sezoanele animeului.  
+  - rating reprezinta ratingul animeului si este calculat ca find valoarea medie a ratingului unui sezon. 
+  - source care este un pointer catre un obiect de tip AnimeInspirationSource
 - contine functia getLegth care calculeaza lungimea totala a animeului adunand lungimea tuturor sezoaenelor, apoi o afiseaza pe ecran si o returneaza.  
 - contine functia ratingUpdate care recalculeaza ratingul unui anime si poate fi apelata la modificarea ratingului unui sezon.  
 - sezoanele sunt adaugate in urma apelului functiei add_season, care este apelata din clasa account dupa ce toate verificarile au fost realizate, daca sezonul are numele standard("Season"), numele este modificat la "Season" + numarul adecvat(daca e al 3 lea sezon numarul 3), apoi sezonul este aduagat in vectorul de sezoane si ratingul animeului este updatat la noua valoarea care ar trebui sa o aiba.  
   
 Clasa Account:  
-- contine variabilele private:  
+- contine variabilele:  
   - name reprezentand numele contului.  
-  - rol reprezentid rolul care e de tip "ADMIN" sau "USER", daca construtorul primeste orice alt string inafara de "ADMIN", seteaza automat rolul la "USER".  
   - password reprezinta parola contului.  
-  - variabila statica accounts, este un mapa care ne ajuta sa vedem daca numele unui cont este deja utilizat si tine minte numarul de apariti al acestuia  rezolvand coliziunile.  
-- costructorul verifica daca numele este diferit de "ADMIN", daca este il seteaza automat la "USER, apoi verifica daca numele este in mapa, daca da returneaza un mesaj adecvat pe ecran si modifica numele adaugand la final al catele account cu numele acesta este(ex: Jim, Jim(2), Jim(3)).
-- functia add_season, verifica daca contul care adauga sezonul este admin, daca nu este sezonul nu este adaugat si se afiseaza un mesaj adecvat. Daca contul este cu rolul "ADMIN" se apeleaza functia add_season din clasa anime.  
-- functia add_episode, verifica daca contul care adauga episodul este admin, daca nu este episodul nu este adaugat si se afiseaza un mesaj adecvat. Daca contul este cu rolul "ADMIN" se apeleaza functia add_episod din clasa anime.     
-- functia add_review verifica ca valoarea reviewului sa fie intre 0 si 10, daca nu este afiseaza un mesaj adecvat si review-ul nu este adaugat, daca este atunci se apeleaza functia add_review din clasa anime.  
+  - variabila statica accounts, este un mapa care ne ajuta sa vedem daca numele unui cont este deja utilizat si tine minte numarul de apariti al acestuia  rezolvand coliziunile.
+  - logged este o variabila care reprezinta daca la aces moment contul este logat
+- costructorul verifica daca numele este unic, contine nu mai litere si cifre si daca parola contine cel putin o litera mare, una mica si o cifra, in caz contrat
+atunca o exceptie potrivita
+- functia add_review verifica daca contul care adauga review-ul este logat si daca valoarea reviewului sa fie intre 0 si 10, daca nu este afiseaza un mesaj adecvat si review-ul nu este adaugat, daca este atunci se apeleaza functia add_review din clasa anime.  
+- functia getPermissions este una pura virtuala.
+- functia statica regexName este folosita pentru a verifica corectiudinea numelui.
+- functia statica regexPassword este folosita pentru a verifica corectiudinea parolei.
+- functia statica logIn verifica daca numele corespunde unui cont si daca parola este cea corect, in caz contrar arunca o exceptie corespunzatoare, apoi seteaza valoarea variabilei logged la true.
+- functia logOut seteaza valoarea variabilei logged la false.
 
-Acesta este o scurta descriere a proiectului.
+clasa Admin:
+- este derivata din clasa Account.
+- nu are variabile in plus.
+- are in plus functiile addSeason si addEpisod care verifca daca contul este logat, apoi adauga un episod la un sezon respectiv un sezon la un anime.
+- functia getPermissions a fost supra scrisa returneaza un string cu permisiunile contului.
+
+clasa User:
+- este derivata din clasa Account.
+- nu are variabile in plus.
+- functia getPermissions a fost supra scrisa returneaza un string cu permisiunile contului.
+
+Acesta este descrierea a proiectului.
