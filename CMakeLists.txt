@@ -80,7 +80,7 @@ endfunction()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp src/Account.cpp src/User.cpp src/Admin.cpp src/Manga.cpp src/Anime.cpp src/Episode.cpp src/Novel.cpp src/Season.cpp src/AnimeInspirationSource.cpp)
 
 ###############################################################################
 
