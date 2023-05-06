@@ -34,8 +34,8 @@ std::ostream& operator<<(std::ostream& os, const Season& sez){
     os << "Sezonul are " << sez.episodes.size() << " episoade\n";
     os << "Seazonul are ratingul de: " << sez.rating <<  " obtinut din " << sez.nrReviews << " recenzi" << "\n";
     os << "Lista Episoadelor:\n\n";
-    for(auto const x: sez.episodes){
-        os << *x << "\n";
+    for(unsigned int i = 0; i < sez.episodes.size(); i++){
+        os << *sez.episodes[i] << "\n";
     }
     return os;
 }

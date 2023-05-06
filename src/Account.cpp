@@ -67,10 +67,11 @@ void Account::logOut(){
 }
 
 bool Account::regexName(const std::string& name_) {
-    return std::ranges::all_of(name_, [](char c) {
-        return std::isalnum(c);
-    });
-
+    for(auto& c: name_){
+        if(!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')))
+            return false;
+    }
+    return true;
 }
 
 std::string Account::regexPassword(const std::string& password_) {

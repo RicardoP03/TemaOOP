@@ -33,8 +33,8 @@ std::ostream& operator<<(std::ostream& os, const Anime& an){
     os << "Animeul are " << an.seasons.size() << " sezoane\n";
     os << "Animeul are ratingul: " << an.rating << "\n";
     os << "Lista sezoanelor:\n\n";
-    for(auto const x: an.seasons){
-        os << *x << "\n";
+    for(unsigned int i = 0; i < an.seasons.size(); i++){
+        os << *an.seasons[i] << "\n";
     }
     return os;
 }
