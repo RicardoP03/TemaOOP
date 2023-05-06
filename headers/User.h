@@ -5,7 +5,6 @@
 #ifndef OOP_USER_H
 #define OOP_USER_H
 
-#include <iostream>
 #include "Account.h"
 
 class User:public Account {
