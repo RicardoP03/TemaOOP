@@ -4,8 +4,8 @@
 
 class Episode{
 private:
-    int duration;
     std::string name;
+    int duration;
 public:
     Episode(const std::string& name_ = "Episode", int duration_ = 24);
     Episode(const Episode& other);
