@@ -33,19 +33,19 @@ std::ostream& operator<<(std::ostream& os, const Anime& an){
     os << "Animeul are " << an.seasons.size() << " sezoane\n";
     os << "Animeul are ratingul: " << an.rating << "\n";
     os << "Lista sezoanelor:\n\n";
-    for(const auto& x: an.seasons){
+    for(auto const& x: an.seasons){
         os << *x << "\n";
     }
     return os;
 }
 
 Anime::~Anime(){
-    delete source;
-    source = nullptr;
-    for (Season* season : seasons) {
-        delete season;
-    }
-    seasons.clear();
+//    delete source;
+//    source = nullptr;
+//    for (Season* season : seasons) {
+//        delete season;
+//    }
+//    seasons.clear();
     std::cout << "Animeul a fost sters\n";
 }
 
