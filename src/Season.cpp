@@ -40,7 +40,11 @@ std::ostream& operator<<(std::ostream& os, const Season& sez){
     return os;
 }
 
-Season::~Season(){
+Season::~Season() {
+    for (Episode* episode : episodes) {
+        delete episode;
+    }
+    episodes.clear();
     std::cout << "Sezonul a fost sters\n";
 }
 

@@ -9,7 +9,7 @@ public:
     User(const User& other);
     User& operator=(const User& other);
     friend std::ostream &operator<<(std::ostream& os, const User& us);
-    ~User() override;
+    virtual ~User() override;
     std::string getPermissions() const override;
 };
 

@@ -2,7 +2,7 @@
 
 #ifndef MapAccounts
 #define MapAccounts
-std::map<std::string, std::shared_ptr<Account>> Account::accounts;
+std::set <std::string> Account::accounts;
 #endif
 
 Account::Account(const std::string& name_, const std::string& password_):name{name_}, password{password_}{
@@ -15,7 +15,7 @@ Account::Account(const std::string& name_, const std::string& password_):name{na
     if(regexPassword(password_) != "passed"){
         throw std::runtime_error(regexPassword(password_));
     }
-    accounts[name_] = std::shared_ptr<Account>(this);
+    accounts.insert(name);
     std::cout << "Contul a fost creat cu succes\n";
 }
 
@@ -38,6 +38,7 @@ std::ostream& operator<<(std::ostream& os, const Account& ac){
 }
 
 Account::~Account(){
+    accounts.erase(this->name);
     std::cout<< "Contul a fost sters\n";
 }
 
@@ -54,10 +55,10 @@ void Account::add_review(Season& se, const int& rating){
 }
 
 void Account::logIn(const std::string &name_, const std::string &password_) {
-    if(accounts.find(name_) == accounts.end() || accounts[name_]->password != password_){
+    if(accounts.find(name_) == accounts.end() || password != password_){
         throw std::runtime_error("Numele sau parola gresite");
     }
-    else accounts[name_]->logged = true;
+    else logged = true;
 }
 
 void Account::logOut(){

@@ -40,6 +40,12 @@ std::ostream& operator<<(std::ostream& os, const Anime& an){
 }
 
 Anime::~Anime(){
+    delete source;
+    source = nullptr;
+    for (Season* season : seasons) {
+        delete season;
+    }
+    seasons.clear();
     std::cout << "Animeul a fost sters\n";
 }
 

@@ -12,7 +12,7 @@ public:
     Manga &operator=(const Manga &other);
     void afisare(std::ostream& os, const std::string &tp) override;
     friend std::ostream &operator<<(std::ostream &os, Manga& mg);
-    ~Manga() override;
+    virtual ~Manga() override;
     void addContent(const std::string &s) override;
     AnimeInspirationSource* clone() const override;
 };

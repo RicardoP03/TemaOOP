@@ -31,13 +31,13 @@ int main() {
     std::cout << u1.getPermissions();
     std::cout << a1.getPermissions();
     try{
-        Account::logIn("Jhon", "Paaaa2222");
+        a1.logIn("Jhon", "Paaaa2222");
     }
     catch(const std::exception& e) {
         std::cout << "Error: " << e.what() << "\n";
     }
-    Account::logIn("Jhon", "Paaaa222");
-    Account::logIn("User1", "Paaaa222");
+    a1.logIn("Jhon", "Paaaa222");
+    u1.logIn("User1", "Paaaa222");
     Episode e1{"Episode 1", 25};
     Episode e2{"Episode", 25};
     Episode e3{"Not coming back", 25};
