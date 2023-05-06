@@ -2,6 +2,7 @@
 #define OOP_ANIME_H
 
 #include <iostream>
+#include <string>
 #include "AnimeInspirationSource.h"
 #include "Season.h"
 

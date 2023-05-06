@@ -4,14 +4,11 @@ Anime::Anime(const std::string& name_, AnimeInspirationSource* source_): name{na
     std::cout << "Animeul a fost adaugat\n";
 }
 
-Anime::Anime(const Anime& an){
-    name = an.name;
-    source = an.source->clone();
+Anime::Anime(const Anime& an): name{an.name}, source{an.source->clone()}, rating{an.rating}{
     seasons.clear();
     for(auto& s: an.seasons){
         seasons.push_back(s->clone());
     }
-    rating = an.rating;
     std::cout << "Constructor copiere Anime\n";
 }
 
@@ -36,7 +33,7 @@ std::ostream& operator<<(std::ostream& os, const Anime& an){
     os << "Animeul are " << an.seasons.size() << " sezoane\n";
     os << "Animeul are ratingul: " << an.rating << "\n";
     os << "Lista sezoanelor:\n\n";
-    for(auto& x: an.seasons){
+    for(const auto& x: an.seasons){
         os << *x << "\n";
     }
     return os;

@@ -2,6 +2,7 @@
 #define OOP_NOVEL_H
 
 #include <iostream>
+#include <string>
 #include "AnimeInspirationSource.h"
 
 class Novel: public AnimeInspirationSource{

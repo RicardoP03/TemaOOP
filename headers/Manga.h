@@ -2,6 +2,7 @@
 #define OOP_MANGA_H
 
 #include <iostream>
+#include <string>
 #include "AnimeInspirationSource.h"
 
 class Manga: public AnimeInspirationSource {

@@ -1,11 +1,11 @@
 #include <iostream>
-#include "/headers/Episode.h"
-#include "/headers/Season.h"
-#include "/headers/Manga.h"
-#include "/headers/Novel.h"
-#include "/headers/Account.h"
-#include "/headers/Admin.h"
-#include "/headers/User.h"
+#include "headers/Episode.h"
+#include "headers/Season.h"
+#include "headers/Manga.h"
+#include "headers/Novel.h"
+#include "headers/Account.h"
+#include "headers/Admin.h"
+#include "headers/User.h"
 
 int main() {
     Admin a1{"Jhon", "Paaaa222"};
