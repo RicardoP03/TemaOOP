@@ -1,4 +1,4 @@
-#include "..\headers\Novel.h"
+#include "../headers/Novel.h"
 
 Novel::Novel(const std::string& name_, const std::string& author_): AnimeInspirationSource(name_, author_){
     std::cout << "Romanul a fost creata\n";

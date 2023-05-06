@@ -1,4 +1,4 @@
-#include "..\headers\Episode.h"
+#include "../headers/Episode.h"
 
 Episode::Episode(const std::string& name_, int duration_) : name{name_}, duration{duration_} {
     std::cout << "Episodul a fost adaugat\n";

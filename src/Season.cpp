@@ -1,19 +1,15 @@
-#include "..\headers\Season.h"
+#include "../headers/Season.h"
 
 Season::Season(const std::string& name_): name{name_}{
     std::cout << "Sezonul a fost adaugat\n";
 }
 
-Season::Season(const Season&other){
-    name = other.name;
+Season::Season(const Season&other): name{other.name}, reviews{other.reviews},
+                                    sumOfRatings{other.sumOfRatings}, nrReviews{other.nrReviews}, rating{other.rating} {
     episodes.clear();
     for(auto& e: other.episodes){
         episodes.push_back(e->clone());
     }
-    reviews = other.reviews;
-    sumOfRatings = other.sumOfRatings;
-    nrReviews = other.nrReviews;
-    rating = other.rating;
     std::cout << "Constructor copiere Sezon\n";
 }
 
@@ -50,7 +46,7 @@ Season::~Season(){
 
 int Season::getLength(){
     int sum = 0;
-    for(auto& x: episodes){
+    for(const auto& x: episodes){
         sum += x->getDuration();
     }
     return sum;

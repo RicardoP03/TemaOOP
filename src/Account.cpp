@@ -1,4 +1,4 @@
-#include "..\headers\Account.h"
+#include "../headers/Account.h"
 
 #ifndef MapAccounts
 #define MapAccounts

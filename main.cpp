@@ -1,12 +1,11 @@
 #include <iostream>
-#include "headers\Episode.h"
-#include "headers\Season.h"
-#include "headers\Manga.h"
-#include "headers\Novel.h"
-#include "headers\Account.h"
-#include "headers\Admin.h"
-#include "headers\User.h"
-#include "headers\AnimeInspirationSource.h"
+#include "/headers/Episode.h"
+#include "/headers/Season.h"
+#include "/headers/Manga.h"
+#include "/headers/Novel.h"
+#include "/headers/Account.h"
+#include "/headers/Admin.h"
+#include "/headers/User.h"
 
 int main() {
     Admin a1{"Jhon", "Paaaa222"};
@@ -78,5 +77,7 @@ int main() {
     m1.addContent("Oshi no ko chap 1");
     m1.addContent("Oshi no ko chap 2");
     std::cout << m1;
+    a1.logOut();
+    u1.logOut();
     return 0;
 }

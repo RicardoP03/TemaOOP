@@ -1,4 +1,4 @@
-#include "..\headers\AnimeInspirationSource.h"
+#include "../headers/AnimeInspirationSource.h"
 
 AnimeInspirationSource::AnimeInspirationSource(const std::string& name_, const std::string& author_): name{name_}, author{author_} {
     std::cout << "Constructor AnimeInspirationSource\n";

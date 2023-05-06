@@ -1,4 +1,4 @@
-#include "..\headers\Manga.h"
+#include "../headers/Manga.h"
 
 Manga::Manga(const std::string& name_, const std::string& author_): AnimeInspirationSource(name_, author_){
     std::cout << "Seria Manga a fost creata\n";

@@ -1,4 +1,4 @@
-#include "..\headers\Admin.h"
+#include "../headers/Admin.h"
 
 Admin::Admin(const std::string& name_, const std::string& password_):Account(name_, password_){
     std::cout << "Constructor Admin\n";

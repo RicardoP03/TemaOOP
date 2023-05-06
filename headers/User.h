@@ -1,7 +1,3 @@
-//
-// Created by Ricardo ROG on 5/5/2023.
-//
-
 #ifndef OOP_USER_H
 #define OOP_USER_H
 

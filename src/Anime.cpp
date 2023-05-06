@@ -1,4 +1,4 @@
-#include "..\headers\Anime.h"
+#include "../headers/Anime.h"
 
 Anime::Anime(const std::string& name_, AnimeInspirationSource* source_): name{name_}, source{source_}{
     std::cout << "Animeul a fost adaugat\n";
