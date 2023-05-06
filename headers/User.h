@@ -19,4 +19,4 @@ public:
 };
 
 
-#endif //OOP_USER_H
+#endif

@@ -21,4 +21,4 @@ public:
 };
 
 
-#endif //OOP_MANGA_H
+#endif

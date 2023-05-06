@@ -33,4 +33,4 @@ public:
     static std::string regexPassword(const std::string& password_);
 };
 
-#endif //OOP_ACCOUNT_H
+#endif

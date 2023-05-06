@@ -17,4 +17,4 @@ public:
     void setName(const std::string& newName);
     Episode* clone();
 };
-#endif OOP_EPISODE_H
+#endif

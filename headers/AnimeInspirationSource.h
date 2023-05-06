@@ -26,4 +26,4 @@ public:
 };
 
 
-#endif //OOP_ANIMEINSPIRATIONSOURCE_H
+#endif

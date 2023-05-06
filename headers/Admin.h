@@ -21,4 +21,4 @@ public:
 };
 
 
-#endif //OOP_ADMIN_H
+#endif

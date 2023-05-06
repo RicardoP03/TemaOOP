@@ -21,4 +21,4 @@ public:
 };
 
 
-#endif //OOP_NOVEL_H
+#endif

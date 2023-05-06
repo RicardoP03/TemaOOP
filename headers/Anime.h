@@ -1,7 +1,3 @@
-//
-// Created by Ricardo ROG on 5/5/2023.
-//
-
 #ifndef OOP_ANIME_H
 #define OOP_ANIME_H
 
@@ -27,4 +23,4 @@ public:
     std::string getName();
 };
 
-#endif //OOP_ANIME_H
+#endif
