@@ -8,6 +8,7 @@ AnimeInspirationSource::AnimeInspirationSource(const AnimeInspirationSource &oth
     name{other.name}, author{other.author}, content{other.content} {
     std::cout << "Constructor de copiere AnimeInspirationSource\n";
 }
+
 AnimeInspirationSource& AnimeInspirationSource::operator=(const AnimeInspirationSource &other) {
     name = other.name;
     author = other.author;

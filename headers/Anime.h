@@ -13,7 +13,7 @@ private:
     std::vector<Season*> seasons;
     long double rating = 0;
 public:
-    Anime(const std::string& name_, AnimeInspirationSource* source_);
+    Anime(std::string&& name_, AnimeInspirationSource* source_);
     Anime(const Anime& an);
     Anime& operator=(const Anime& an);
     friend std::ostream& operator<<(std::ostream& os, const Anime& an);

@@ -1,6 +1,6 @@
 #include "../headers/Anime.h"
 
-Anime::Anime(const std::string& name_, AnimeInspirationSource* source_): name{name_}, source{source_}{
+Anime::Anime(std::string&& name_, AnimeInspirationSource* source_): name{std::move(name_)}, source{source_}{
     std::cout << "Animeul a fost adaugat\n";
 }
 
@@ -33,19 +33,13 @@ std::ostream& operator<<(std::ostream& os, const Anime& an){
     os << "Animeul are " << an.seasons.size() << " sezoane\n";
     os << "Animeul are ratingul: " << an.rating << "\n";
     os << "Lista sezoanelor:\n\n";
-    for(auto const& x: an.seasons){
+    for(auto const x: an.seasons){
         os << *x << "\n";
     }
     return os;
 }
 
 Anime::~Anime(){
-//    delete source;
-//    source = nullptr;
-//    for (Season* season : seasons) {
-//        delete season;
-//    }
-//    seasons.clear();
     std::cout << "Animeul a fost sters\n";
 }
 
@@ -60,7 +54,7 @@ int Anime::getLength(){
 void Anime::ratingUpdate(){
     long double sum = 0;
     for(auto& x: seasons){
-        x->getRating();
+        sum += x->getRating();
     }
     rating = sum / seasons.size();
     std::cout << "Animeul are ratingul: " << rating << "\n";

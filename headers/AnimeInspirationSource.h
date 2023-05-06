@@ -18,7 +18,7 @@ public:
     friend std::ostream &operator<<(std::ostream& os, const AnimeInspirationSource& ais);
     virtual ~AnimeInspirationSource();
     virtual void addContent(const std::string& s);
-    virtual AnimeInspirationSource* clone() const = 0;
+    [[nodiscard]] virtual AnimeInspirationSource* clone() const = 0;
 };
 
 

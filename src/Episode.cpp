@@ -1,6 +1,6 @@
 #include "../headers/Episode.h"
 
-Episode::Episode(const std::string& name_, int duration_) : name{name_}, duration{duration_} {
+Episode::Episode(std::string&& name_, int duration_) : name{std::move(name_)}, duration{duration_} {
     std::cout << "Episodul a fost adaugat\n";
 }
 
@@ -25,7 +25,7 @@ Episode::~Episode(){
     std::cout << "Episodul a fost sters\n";
 }
 
-int Episode::getDuration(){
+int Episode::getDuration() const{
     return duration;
 }
 

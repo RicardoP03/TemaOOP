@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "../headers/Account.h"
 
 #ifndef MapAccounts
@@ -66,11 +67,10 @@ void Account::logOut(){
 }
 
 bool Account::regexName(const std::string& name_) {
-    for(auto& c: name_){
-        if(!((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')))
-            return false;
-    }
-    return true;
+    return std::ranges::all_of(name_, [](char c) {
+        return std::isalnum(c);
+    });
+
 }
 
 std::string Account::regexPassword(const std::string& password_) {

@@ -12,9 +12,9 @@ public:
     Novel &operator=(const Novel &other);
     void afisare(std::ostream& os, const std::string &tp) override;
     friend std::ostream &operator<<(std::ostream &os, Novel& nv);
-    virtual ~Novel() override;
+    ~Novel() override;
     void addContent(const std::string &s) override;
-    AnimeInspirationSource* clone() const override;
+    [[nodiscard]] AnimeInspirationSource* clone() const override;
 };
 
 #endif

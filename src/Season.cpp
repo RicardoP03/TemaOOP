@@ -1,6 +1,6 @@
 #include "../headers/Season.h"
 
-Season::Season(const std::string& name_): name{name_}{
+Season::Season(std::string&& name_): name{std::move(name_)}{
     std::cout << "Sezonul a fost adaugat\n";
 }
 
@@ -34,17 +34,13 @@ std::ostream& operator<<(std::ostream& os, const Season& sez){
     os << "Sezonul are " << sez.episodes.size() << " episoade\n";
     os << "Seazonul are ratingul de: " << sez.rating <<  " obtinut din " << sez.nrReviews << " recenzi" << "\n";
     os << "Lista Episoadelor:\n\n";
-    for(const auto& x: sez.episodes){
+    for(auto const x: sez.episodes){
         os << *x << "\n";
     }
     return os;
 }
 
 Season::~Season() {
-    for (Episode* episode : episodes) {
-        delete episode;
-    }
-    episodes.clear();
     std::cout << "Sezonul a fost sters\n";
 }
 
@@ -76,7 +72,7 @@ std::string Season::getName(){
     return name;
 }
 
-long double Season::getRating(){
+long double Season::getRating() const{
     return rating;
 }
 
