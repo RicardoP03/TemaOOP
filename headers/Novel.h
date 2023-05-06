@@ -17,5 +17,4 @@ public:
     AnimeInspirationSource* clone() const override;
 };
 
-
 #endif
