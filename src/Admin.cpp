@@ -23,6 +23,7 @@ std::ostream &operator<<(std::ostream& os, const Admin& ad){
 
 Admin::~Admin() {
     std::cout << "Destructor Admin\n";
+    Account::~Account();
 }
 
 void Admin::add_season(Anime& an, Season& se){
