@@ -9,24 +9,6 @@
 
 int main() {
     Admin a1{"Jhon", "Paaaa222"};
-    try{
-        Admin a2{"Jane", "Aaaa22"};
-    }
-    catch(const std::exception& e) {
-        std::cout << "Error: " << e.what() << "\n";
-    }
-    try{
-        Admin a3{"Jhon", "Ajdsdjsk43"};
-    }
-    catch(const std::exception& e) {
-        std::cout << "Error: " << e.what() << "\n";
-    }
-    try{
-        Admin a4{"Jho n", "Aaaa224dsd"};
-    }
-    catch(const std::exception& e) {
-        std::cout << "Error: " << e.what() << "\n";
-    }
     User u1{"User1", "Paaaa222"};
     std::cout << u1.getPermissions();
     std::cout << a1.getPermissions();

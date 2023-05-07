@@ -1,6 +1,6 @@
 #include "../headers/Admin.h"
 
-Admin::Admin(const std::string& name_, const std::string& password_):Account(name_, password_){
+Admin::Admin(const std::string& name_, const std::string& password_): Account(name_, password_){
     std::cout << "Constructor Admin\n";
 }
 
@@ -23,7 +23,6 @@ std::ostream &operator<<(std::ostream& os, const Admin& ad){
 
 Admin::~Admin() {
     std::cout << "Destructor Admin\n";
-    Account::~Account();
 }
 
 void Admin::add_season(Anime& an, Season& se){

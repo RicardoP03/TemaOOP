@@ -23,7 +23,6 @@ std::ostream &operator<<(std::ostream& os, const User& us){
 
 User::~User() {
     std::cout << "Destructor User\n";
-    Account::~Account();
 }
 
 std::string User::getPermissions() const {
