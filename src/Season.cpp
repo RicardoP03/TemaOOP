@@ -4,22 +4,15 @@ Season::Season(std::string&& name_): name{std::move(name_)}{
     std::cout << "Sezonul a fost adaugat\n";
 }
 
-Season::Season(const Season&other): name{other.name}, reviews{other.reviews},
+Season::Season(const Season&other): name{other.name}, episodes{other.episodes}, reviews{other.reviews},
                                     sumOfRatings{other.sumOfRatings}, nrReviews{other.nrReviews}, rating{other.rating} {
-    episodes.clear();
-    for(auto& e: other.episodes){
-        episodes.push_back(e->clone());
-    }
     std::cout << "Constructor copiere Sezon\n";
 }
 
 Season& Season::operator=(const Season&other){
     if(this != &other) {
         name = other.name;
-        episodes.clear();
-        for (auto &e: other.episodes) {
-            episodes.push_back(e->clone());
-        }
+        this->episodes = other.episodes;
         this->reviews = other.reviews;
         sumOfRatings = other.sumOfRatings;
         nrReviews = other.nrReviews;
@@ -35,7 +28,7 @@ std::ostream& operator<<(std::ostream& os, const Season& sez){
     os << "Seazonul are ratingul de: " << sez.rating <<  " obtinut din " << sez.nrReviews << " recenzi" << "\n";
     os << "Lista Episoadelor:\n\n";
     for(unsigned int i = 0; i < sez.episodes.size(); i++){
-        os << *sez.episodes[i] << "\n";
+        os << sez.episodes[i] << "\n";
     }
     return os;
 }
@@ -47,7 +40,7 @@ Season::~Season() {
 int Season::getLength(){
     int sum = 0;
     for(const auto& x: episodes){
-        sum += x->getDuration();
+        sum += x.getDuration();
     }
     return sum;
 }
@@ -57,7 +50,7 @@ void Season::add_episode(Episode& ep){
         std::string aux = "Episode " + std::to_string(episodes.size() + 1);
         ep.setName(aux);
     }
-    episodes.push_back(&ep);
+    episodes.push_back(ep);
 }
 
 void Season::add_review(const std::string& accountName, const int& rate){
@@ -79,7 +72,5 @@ long double Season::getRating() const{
 void Season::setName(const std::string& newName){
     name = newName;
 }
-
-Season* Season::clone() {return new Season(*this);}
 
 

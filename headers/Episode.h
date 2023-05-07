@@ -15,6 +15,5 @@ public:
     std::string getName();
     [[nodiscard]] int getDuration() const;
     void setName(const std::string& newName);
-    Episode* clone();
 };
 #endif

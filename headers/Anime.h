@@ -9,8 +9,8 @@
 class Anime{
 private:
     std::string name;
-    AnimeInspirationSource *source;
-    std::vector<Season*> seasons;
+    AnimeInspirationSource* source;
+    std::vector<Season> seasons;
     long double rating = 0;
 public:
     Anime(std::string&& name_, AnimeInspirationSource* source_);

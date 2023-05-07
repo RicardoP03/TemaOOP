@@ -36,7 +36,3 @@ std::string Episode::getName(){
 void Episode::setName(const std::string& newName){
     name = newName;
 }
-
-Episode* Episode::clone() {
-    return new Episode(*this);
-}
