@@ -39,7 +39,6 @@ std::ostream& operator<<(std::ostream& os, const Account& ac){
 }
 
 Account::~Account(){
-    accounts.erase(this->name);
     std::cout<< "Contul a fost sters\n";
 }
 

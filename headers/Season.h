@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <map>
+#include <string>
 #include "Episode.h"
 
 
