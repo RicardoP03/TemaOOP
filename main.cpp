@@ -12,6 +12,32 @@ int main() {
     User u1{"User1", "Paaaa222"};
     std::cout << u1.getPermissions();
     std::cout << a1.getPermissions();
+    try{
+        Admin a2{"Jane", "Aaaa22"};
+    }
+    catch(const std::exception& e) {
+        std::cout << "Error: " << e.what() << "\n";
+    }
+    try{
+        Admin a3{"Jhon", "Ajdsdjsk43"};
+    }
+    catch(const std::exception& e) {
+        std::cout << "Error: " << e.what() << "\n";
+    }
+    try{
+        Admin a4{"Jho n", "Aaaa224dsd"};
+    }
+    catch(const std::exception& e) {
+        std::cout << "Error: " << e.what() << "\n";
+    }
+    std::cout << u1.getPermissions();
+    std::cout << a1.getPermissions();
+    try{
+        a1.logIn("Jhon", "Paaaa2222");
+    }
+    catch(const std::exception& e) {
+        std::cout << "Error: " << e.what() << "\n";
+    }
     a1.logIn("Jhon", "Paaaa222");
     u1.logIn("User1", "Paaaa222");
     Episode e1{"Episode 1", 25};
