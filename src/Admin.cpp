@@ -16,7 +16,7 @@ Admin& Admin::operator=(const Admin &other) {
 }
 
 std::ostream &operator<<(std::ostream& os, const Admin& ad){
-    os << static_cast<const Account&>(ad);
+    ad.afisare(os);
     os << "Contul are rolul de ADMIN\n";
     return os;
 }
@@ -40,11 +40,9 @@ void Admin::add_episode(Season& se, Episode& ep) {
 }
 
 std::string Admin::getPermissions() const {
-    std::string a;
-    a += "Contul are permisiunile de a:\n";
-    a += "-De a adauga review-uri\n";
-    a += "-De a viziona un episod\n";
-    a += "-De a adauga sezoane la un anime\n";
-    a += "-De a adauga episoade la un sezon\n";
-    return a;
+    return "Contul are permisiunile de a:\n"
+        "-De a adauga review-uri\n"
+        "-De a viziona un episod\n"
+        "-De a adauga sezoane la un anime\n"
+        "-De a adauga episoade la un sezon\n";
 }

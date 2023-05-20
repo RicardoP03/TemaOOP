@@ -4,7 +4,6 @@
 #include <iostream>
 #include <set>
 #include <memory>
-#include <stdexcept>
 #include "Season.h"
 #include "Anime.h"
 
@@ -12,8 +11,10 @@ class Account{
 private:
     std::string name;
     std::string password;
+    std::string salt;
     static std::set <std::string> accounts;
 protected:
+    void afisare(std::ostream& os) const;
     bool logged = false;
 public:
     Account(const std::string& name_, const std::string& password_);
@@ -27,6 +28,8 @@ public:
     void logOut();
     static bool regexName(const std::string& name_);
     static std::string regexPassword(const std::string& password_);
+    static std::string make_salt(); // cod preluat din https://github.com/mcmarius/oop-template/blob/common-libs/main.cpp
+    static std::string hash_password(const std::string& plain, const std::string& salt);
 };
 
 #endif

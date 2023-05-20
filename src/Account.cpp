@@ -1,21 +1,21 @@
-#include <algorithm>
+#include "../digestpp/digestpp.hpp"
 #include "../headers/Account.h"
+#include "../headers/Exception.h"
 
-#ifndef MapAccounts
-#define MapAccounts
 std::set <std::string> Account::accounts;
-#endif
 
 Account::Account(const std::string& name_, const std::string& password_):name{name_}, password{password_}{
     if(!regexName(name_)){
-        throw std::runtime_error("Numele trebuie sa contina doar litere si cifre, contul nu a fost creat");
+        throw errorNameContent();
     }
     if(accounts.find(name_) != accounts.end()){
-        throw std::runtime_error("Numele este deja folosit");
+        throw errorNameUsed();
     }
     if(regexPassword(password_) != "passed"){
-        throw std::runtime_error(regexPassword(password_));
+        throw errorPasswordContent(regexPassword(password_));
     }
+    salt = make_salt();
+    password = Account::hash_password(password, salt);
     accounts.insert(name);
     std::cout << "Contul a fost creat cu succes\n";
 }
@@ -34,9 +34,14 @@ Account& Account::operator=(const Account& other){
 
 std::ostream& operator<<(std::ostream& os, const Account& ac){
     os << "Numele contului este: " << ac.name << "\n";
-    os << "Parola este: " << ac.password << "\n";
     return os;
 }
+
+
+void Account::afisare(std::ostream& os) const{
+    os << "Numele contului este: " << name << "\n";
+}
+
 
 Account::~Account(){
     std::cout<< "Contul a fost sters\n";
@@ -55,8 +60,8 @@ void Account::add_review(Season& se, const int& rating){
 }
 
 void Account::logIn(const std::string &name_, const std::string &password_) {
-    if(accounts.find(name_) == accounts.end() || password != password_){
-        throw std::runtime_error("Numele sau parola gresite");
+    if(accounts.find(name_) == accounts.end() || Account::hash_password(password_, salt) != password){
+        throw errorPaswordName();
     }
     else logged = true;
 }
@@ -79,12 +84,28 @@ std::string Account::regexPassword(const std::string& password_) {
         if(c >= '0' && c <= '9') nr = true;
         if(c >= 'a' && c <= 'z') lmic = true;
         if(c >= 'A' && c <= 'Z') Lmare = true;
-        if(c == ' ' || c == '\n' || c == '\t') return "Parola nu trebuie sa contina spatii";
+        if(std::isspace(c)) return "Parola nu trebuie sa contina spatii";
     }
     if(!nr) return "Parola trebuie sa contina cel putin o cifra";
     if(!lmic) return  "Parola trebuie sa contina cel putin o litera mica";
     if(!Lmare) return "Parola trebuie sa contina cel putin o litera mare";
-    if(password_.length() < 8) return "Parola trebuie sa contina cel putin 8 charactere";
+    if(password_.length() < 12) return "Parola trebuie sa contina cel putin 12 charactere";
     return "passed";
 }
 
+
+std::string Account::make_salt(){
+    static uint64_t nr = 1u;
+    std::string salt;
+    auto bytes = static_cast<unsigned char*>(static_cast<void*>(&nr));
+    for(unsigned i = 0; i < 16; i++) {
+        salt += bytes[i%8];
+    }
+    ++nr;
+    return salt;
+}
+
+
+std::string Account::hash_password(const std::string& plain, const std::string& salt) {
+    return digestpp::blake2b(512).set_salt(salt).absorb(plain).hexdigest();
+}

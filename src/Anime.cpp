@@ -11,8 +11,9 @@ Anime::Anime(const Anime& an): name{an.name}, source{an.source->clone()}, season
 Anime& Anime::operator=(const Anime& an){
     if(this != &an) {
         name = an.name;
-        delete source;
+        AnimeInspirationSource* aux = an.source;
         source = an.source->clone();
+        delete aux;
         seasons = an.seasons;
         rating = an.rating;
     }

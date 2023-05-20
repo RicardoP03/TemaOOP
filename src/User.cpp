@@ -16,7 +16,7 @@ User& User::operator=(const User &other) {
 }
 
 std::ostream &operator<<(std::ostream& os, const User& us){
-    os << static_cast<const Account&>(us);
+    us.afisare(os);
     os << "Contul are rolul de USER\n";
     return os;
 }
@@ -26,9 +26,7 @@ User::~User() {
 }
 
 std::string User::getPermissions() const {
-    std::string a;
-    a += "Contul are permisiunile de a:\n";
-    a += "-De a adauga review-uri\n";
-    a += "-De a viziona un episod\n";
-    return a;
+    return "Contul are permisiunile de a:\n"
+        "-De a adauga review-uri\n"
+        "-De a viziona un episod\n";
 }
