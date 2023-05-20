@@ -28,15 +28,26 @@ Clasa AnimeInspirationSource:
 - Functia addContent adauga element in vectorul content.
 - Functia afisare este folosita pentru a afisa derivatele clasei.
 - Functia clone este una pura virtuala.
+- Functiile getReadingTime si getTotalReadingTime sunt de asemenea pure virtuale
 
 Clasa Manga:  
-- mosteneste clasa AnimeInspirationSource, nu are variabile in plus.   
-- Functia addContent a fost suprascrisa cu mici modificari.
+- mosteneste clasa AnimeInspirationSource
+- are variabilele private:
+    - illustrator care reprezinta ilustratorul seriei
+    - artStyle care reprezinta stilul de arta
+    - chapters un vector care tine numele capitolelor
+    - chaptersDetail este un vector de tip pair <int, int> contine detaliile capitolului corespunzator(numarul de pagini si numarul de panele)
+- Functia addContent adauga un capitolul now in vectorul chapters si adauga in chaptersDetail detaliile acestuia.
+- Functiile getReadingTime si getTotalReadingTime au fost suprascrise pentru a returna durata de citire a unui capitolul primit ca paramentru, respectiv durata totala de citire.
 - Functia clone a fost suprascrisa pentru a clona un obiect.
   
 Clasa Novel:  
-- mosteneste clasa AnimeInspirationSource, nu are variabile in plus.   
+- mosteneste clasa AnimeInspirationSource.
+- are variabilele private:
+  - volumes, un vector de tip pair<string, string> care retine numele respectiv editorul volumului
+  - bookDetails, un vector de tip pair<int, int> care retine numarul de pagini, respectiv numaraul mediu de cuvinte pe o pagina    
 - Functia addContent a fost suprascrisa cu mici modificari.
+- - Functiile getReadingTime si getTotalReadingTime au fost suprascrise pentru a returna durata de citire a unui volum primit ca paramentru, respectiv durata totala de citire.
 - Functia clone a fost suprascrisa pentru a clona un obiect.
 
 Clasa Anime:  
@@ -53,16 +64,19 @@ Clasa Account:
 - contine variabilele:  
   - name reprezentand numele contului.  
   - password reprezinta parola contului.  
+  - salt reprezinta un salt-ul care este folosit la criptarea parolei
   - variabila statica accounts, este un mapa care ne ajuta sa vedem daca numele unui cont este deja utilizat si tine minte numarul de apariti al acestuia  rezolvand coliziunile.
   - logged este o variabila care reprezinta daca la aces moment contul este logat
 - costructorul verifica daca numele este unic, contine nu mai litere si cifre si daca parola contine cel putin o litera mare, una mica si o cifra, in caz contrat
-atunca o exceptie potrivita
+atunca o exceptie potrivita, apoi creaza un salt unic si cripteaza parola + salt inlocuid valoarea parolei la valoarea criptata
 - functia add_review verifica daca contul care adauga review-ul este logat si daca valoarea reviewului sa fie intre 0 si 10, daca nu este afiseaza un mesaj adecvat si review-ul nu este adaugat, daca este atunci se apeleaza functia add_review din clasa anime.  
 - functia getPermissions este una pura virtuala.
 - functia statica regexName este folosita pentru a verifica corectiudinea numelui.
 - functia statica regexPassword este folosita pentru a verifica corectiudinea parolei.
 - functia statica logIn verifica daca numele corespunde unui cont si daca parola este cea corect, in caz contrar arunca o exceptie corespunzatoare, apoi seteaza valoarea variabilei logged la true.
 - functia logOut seteaza valoarea variabilei logged la false.
+- functia statica make_salt genereaza un salt unic.
+- functia statica hash_password genereaza un hash pentru parola folosid deigestpp.
 
 clasa Admin:
 - este derivata din clasa Account.
@@ -75,4 +89,6 @@ clasa User:
 - nu are variabile in plus.
 - functia getPermissions a fost supra scrisa returneaza un string cu permisiunile contului.
 
-Acesta este descrierea a proiectului.
+Resurse:
+[digestpp](https://github.com/kerukuro/digestpp/tree/4ec4106677e652a90716ad929d657a622089ef16)
+[make_salt](https://github.com/mcmarius/oop-template/blob/common-libs/main.cpp)
