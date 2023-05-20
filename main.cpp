@@ -67,5 +67,6 @@ int main() {
     std::cout << "Citirea ar dura intre " << m1.getTotalReadingTime().first << " - " << m1.getTotalReadingTime().second << " minute\n";
     a1.logOut();
     u1.logOut();
+    delete inspirationSource;
     return 0;
 }
