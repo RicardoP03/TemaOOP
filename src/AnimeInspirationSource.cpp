@@ -18,7 +18,8 @@ AnimeInspirationSource& AnimeInspirationSource::operator=(const AnimeInspiration
 
 
 void AnimeInspirationSource::afisare(std::ostream& os, const std::string& tp) {
-    if (tp == "Manga") os << "Numele seriei manga pe care este bazat animeul este " << name << "\n";
+    if(tp == "Script") os << "Numele scenariului pe care este baza animenul este " << name << "\n";
+    else if(tp == "Manga") os << "Numele seriei manga pe care este bazat animeul este " << name << "\n";
     else os << "Numele romanului pe care este bazat animeul este " << name << "\n";
     os << "Autorul seriei este: " << author << "\n";
 }

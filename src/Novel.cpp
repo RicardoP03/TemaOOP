@@ -43,15 +43,19 @@ AnimeInspirationSource* Novel::clone() const {
 }
 
 std::pair<int, int> Novel::getReadingTime(const unsigned int& parte) const{
-    int min = bookDetails[parte].first * bookDetails[parte].second;
+    if(parte < 1 && parte > bookDetails.size()){
+        std::cout << "Volumul nu exista\n";
+        return {0, 0};
+    }
+    int min = bookDetails[parte - 1].first * bookDetails[parte - 1].second;
     return {std::ceil(min / 250), std::ceil(min / 150)};
 }
 
 std::pair<int, int> Novel::getTotalReadingTime() const {
     std::pair<int, int> aux = {0, 0};
     for(unsigned int i = 0; i < bookDetails.size(); i++){
-        aux.first += getReadingTime(i).first;
-        aux.second += getReadingTime(i).second;
+        aux.first += getReadingTime(i + 1).first;
+        aux.second += getReadingTime(i + 1).second;
     }
     return aux;
 }

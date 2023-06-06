@@ -6,6 +6,7 @@
 #include "headers/Account.h"
 #include "headers/Admin.h"
 #include "headers/User.h"
+#include "headers/AnimeScript.h"
 
 int main() {
     Admin a1{"Jhon", "ParolaAccounta1"};
@@ -65,6 +66,9 @@ int main() {
     m1.addContent("Oshi no ko chap 2", 28, 93);
     std::cout << m1;
     std::cout << "Citirea ar dura intre " << m1.getTotalReadingTime().first << " - " << m1.getTotalReadingTime().second << " minute\n";
+    AnimeScript as1("CYBERPUNK script", "Masahiko Otsuka", 230, 400);
+    std::cout << as1;
+    std::cout << "Citirea ar dura intre " << as1.getTotalReadingTime().first << " - " << as1.getTotalReadingTime().second << " minute\n";
     a1.logOut();
     u1.logOut();
     delete inspirationSource;

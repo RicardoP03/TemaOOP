@@ -41,7 +41,11 @@ void Manga::addContent(const std::string& nume_, const int& pagini, const int& p
 
 
 std::pair<int, int> Manga::getReadingTime(const unsigned int& parte) const {
-    int min = chapterDetails[parte].first / 8 + chapterDetails[parte].second / 12;
+    if(parte < 1 && parte > chapterDetails.size()){
+        std::cout << "Capitolul nu exista\n";
+        return {0, 0};
+    }
+    int min = chapterDetails[parte - 1].first / 8 + chapterDetails[parte - 1].second / 12;
     return {std::ceil(min * 3 / 4), std::ceil(min * 5 / 4)};
 }
 
@@ -49,8 +53,8 @@ std::pair<int, int> Manga::getReadingTime(const unsigned int& parte) const {
 std::pair<int, int> Manga::getTotalReadingTime() const {
     std::pair<int, int> aux = {0, 0};
     for(unsigned int i = 0; i < chapterDetails.size(); i++){
-        aux.first += getReadingTime(i).first;
-        aux.second += getReadingTime(i).second;
+        aux.first += getReadingTime(i + 1).first;
+        aux.second += getReadingTime(i + 1).second;
     }
     return aux;
 }

@@ -80,7 +80,7 @@ endfunction()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} main.cpp src/Account.cpp src/User.cpp src/Admin.cpp src/Manga.cpp src/Anime.cpp src/Episode.cpp src/Novel.cpp src/Season.cpp src/AnimeInspirationSource.cpp digestpp/digestpp.hpp digestpp/hasher.hpp headers/Exception.h)
+add_executable(${PROJECT_NAME} main.cpp src/Account.cpp src/User.cpp src/Admin.cpp src/Manga.cpp src/Anime.cpp src/Episode.cpp src/Novel.cpp src/Season.cpp src/AnimeInspirationSource.cpp headers/Exception.h src/AnimeScript.cpp)
 
 ###############################################################################
 
@@ -117,6 +117,12 @@ set_custom_stdlib_and_sanitizers(${PROJECT_NAME} true)
 #target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
 #target_link_directories(${PROJECT_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
 #target_link_libraries(${PROJECT_NAME} <SomeLib>)
+include_directories(${CMAKE_SOURCE_DIR}/digestpp)
+target_sources(${PROJECT_NAME}
+        PRIVATE
+        ${CMAKE_SOURCE_DIR}/digestpp/digestpp.hpp
+        ${CMAKE_SOURCE_DIR}/digestpp/hasher.hpp
+        )
 
 ###############################################################################
 
