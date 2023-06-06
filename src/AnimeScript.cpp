@@ -41,13 +41,17 @@ AnimeInspirationSource* AnimeScript::clone() const {
 
 
 std::pair<int, int> AnimeScript::getReadingTime(const unsigned int& parte) const{
-    int min = nrPages * avgWordsPerPage;
+    if(parte != 1){
+        std::cout << "Scenariile nu au decat o parte\n";
+        return {0, 0};
+    }
+    unsigned int min = nrPages * avgWordsPerPage;
     return {std::ceil(min / 250), std::ceil(min / 150)};
 }
 
 
 std::pair<int, int> AnimeScript::getTotalReadingTime() const {
-    return this->getReadingTime(0);
+    return this->getReadingTime(1);
 }
 
 
