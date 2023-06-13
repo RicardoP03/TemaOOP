@@ -605,4 +605,6 @@ T Meniu::readContent() {
         std::cin >> nrcuv;
         return AnimeScript(name, author, nrpg, nrcuv);
     }
+
+    return T();
 }
