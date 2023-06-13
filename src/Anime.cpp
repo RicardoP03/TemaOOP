@@ -1,31 +1,28 @@
-#include "../headers/Anime.h"
+#include "../headers/Manga.h"
+#include "../headers/Novel.h"
+#include "../headers/AnimeScript.h"
 
-Anime::Anime(std::string&& name_, AnimeInspirationSource* source_): name{std::move(name_)}, source{source_->clone()}{
-    std::cout << "Animeul a fost adaugat\n";
+
+template<typename T>
+int Anime<T>::idMax = 0;
+
+
+template<typename T>
+Anime<T>::Anime(const std::string& name_, const T& source_) : name(name_), source(source_) {
+    idMax++;
+    id = idMax;
 }
 
-Anime::Anime(const Anime& an): name{an.name}, source{an.source->clone()}, seasons{an.seasons}, rating{an.rating}{
-    std::cout << "Constructor copiere Anime\n";
-}
 
-Anime& Anime::operator=(const Anime& an){
-    if(this != &an) {
-        name = an.name;
-        AnimeInspirationSource* aux = an.source;
-        source = an.source->clone();
-        delete aux;
-        seasons = an.seasons;
-        rating = an.rating;
-    }
-    std::cout << "operator = copiere Anime\n";
-    return *this;
-}
-
-std::ostream& operator<<(std::ostream& os, const Anime& an){
+template<typename T>
+std::ostream& operator<<(std::ostream& os, Anime<T>& an) {
     os << "Numele Animeului este: " << an.name << "\n";
-    os << *an.source << "\n";
+    os << an.source << "\n";
+    os << "Sursa de inspiratie nu a fost precizata\n";
     os << "Animeul are " << an.seasons.size() << " sezoane\n";
+    an.ratingUpdate();
     os << "Animeul are ratingul: " << an.rating << "\n";
+    os << "Animeul are lungime de: " << an.getLength() << " minute\n";
     os << "Lista sezoanelor:\n\n";
     for(unsigned int i = 0; i < an.seasons.size(); i++){
         os << an.seasons[i] << "\n";
@@ -33,13 +30,9 @@ std::ostream& operator<<(std::ostream& os, const Anime& an){
     return os;
 }
 
-Anime::~Anime(){
-    delete source;
-    source = nullptr;
-    std::cout << "Animeul a fost sters\n";
-}
 
-int Anime::getLength(){
+template<typename T>
+int Anime<T>::getLength(){
     int sum = 0;
     for(auto&x : seasons){
         sum += x.getLength();
@@ -47,7 +40,9 @@ int Anime::getLength(){
     return sum;
 }
 
-void Anime::ratingUpdate(){
+
+template<typename T>
+void Anime<T>::ratingUpdate(){
     long double sum = 0;
     for(auto& x: seasons){
         sum += x.getRating();
@@ -56,7 +51,9 @@ void Anime::ratingUpdate(){
     std::cout << "Animeul are ratingul: " << rating << "\n";
 }
 
-void Anime::add_season(Season &se){
+
+template<typename T>
+void Anime<T>::add_season(Season &se){
     if (se.getName() == "Season") {
         std::string aux = "Season " + std::to_string(seasons.size() + 1);
         se.setName(aux);
@@ -67,6 +64,8 @@ void Anime::add_season(Season &se){
     rating = rating / seasons.size();
 }
 
-std::string Anime::getName(){
-    return name;
+
+template<typename T>
+int Anime<T>::getId() const{
+    return id;
 }

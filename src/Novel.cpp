@@ -1,17 +1,14 @@
 #include "../headers/Novel.h"
 #include <cmath>
 
-Novel::Novel(const std::string& name_, const std::string& author_): AnimeInspirationSource(name_, author_){
-    std::cout << "Romanul a fost creata\n";
-}
+Novel::Novel(const std::string& name_, const std::string& author_): AnimeInspirationSource(name_, author_){}
 
-Novel::Novel(const Novel& other): AnimeInspirationSource(other){
-    std::cout << "Constructor de copiere Novel\n";
-}
 
 Novel& Novel::operator=(const Novel& other){
     if(this != &other){
         AnimeInspirationSource::operator=(other);
+        volumes = other.volumes;
+        bookDetails = other.bookDetails;
     }
     return *this;
 }
@@ -25,22 +22,17 @@ std::ostream& operator<<(std::ostream& os, Novel& nv){
         os << "A avut ca editor pe: " << nv.volumes[i].second << "\n";
         os << "Voluml are " <<  nv.bookDetails[i].first << " pagini si o medie de " << nv.bookDetails[i].second << " cuvinte pe pagina\n";
     }
+    std::cout << "Parcurgerea romanului are dura intre " <<
+              nv.getTotalReadingTime().first << " si " << nv.getTotalReadingTime().second << "\n";
     return os;
 }
 
-
-Novel::~Novel(){
-    std::cout << "Romanul a fost stears\n";
-}
 
 void Novel::addContent(const std::string& nume, const std::string& editor, const int& nrpages, const int& avgWordsPage){
     volumes.emplace_back(nume, editor);
     bookDetails.emplace_back(nrpages, avgWordsPage);
 }
 
-AnimeInspirationSource* Novel::clone() const {
-    return new Novel(*this);
-}
 
 std::pair<int, int> Novel::getReadingTime(const unsigned int& parte) const{
     if(parte < 1 && parte > bookDetails.size()){
@@ -50,6 +42,7 @@ std::pair<int, int> Novel::getReadingTime(const unsigned int& parte) const{
     int min = bookDetails[parte - 1].first * bookDetails[parte - 1].second;
     return {std::ceil(min / 250), std::ceil(min / 150)};
 }
+
 
 std::pair<int, int> Novel::getTotalReadingTime() const {
     std::pair<int, int> aux = {0, 0};

@@ -6,22 +6,30 @@
 #include "AnimeInspirationSource.h"
 #include "Season.h"
 
+
+template<typename T>
 class Anime{
 private:
+    static int idMax;
+    int id;
     std::string name;
-    AnimeInspirationSource* source;
+    T source;
     std::vector<Season> seasons;
     long double rating = 0;
 public:
-    Anime(std::string&& name_, AnimeInspirationSource* source_);
-    Anime(const Anime& an);
-    Anime& operator=(const Anime& an);
-    friend std::ostream& operator<<(std::ostream& os, const Anime& an);
-    ~Anime();
+    Anime() = default;
+    Anime(const std::string& name_, const T& source_);
+    Anime(const Anime& an) = default;
+    Anime& operator=(const Anime& an) = default;
+    template<typename U>
+    friend std::ostream& operator<<(std::ostream& os, Anime<U>& anime);
+    ~Anime() = default;
     int getLength();
     void ratingUpdate();
     void add_season(Season &se);
-    std::string getName();
+    int getId() const;
 };
 
+
+#include "../src/Anime.cpp"
 #endif

@@ -1,19 +1,11 @@
 #include "../headers/AnimeInspirationSource.h"
 
+int AnimeInspirationSource::idMax = 0;
+
+
 AnimeInspirationSource::AnimeInspirationSource(const std::string& name_, const std::string& author_): name{name_}, author{author_} {
-    std::cout << "Constructor AnimeInspirationSource\n";
-}
-
-AnimeInspirationSource::AnimeInspirationSource(const AnimeInspirationSource &other):
-    name{other.name}, author{other.author}{
-    std::cout << "Constructor de copiere AnimeInspirationSource\n";
-}
-
-AnimeInspirationSource& AnimeInspirationSource::operator=(const AnimeInspirationSource &other) {
-    name = other.name;
-    author = other.author;
-    std::cout << "Operator= AnimeInspirationSource\n";
-    return *this;
+    idMax++;
+    id = idMax;
 }
 
 
@@ -31,7 +23,8 @@ std::ostream &operator<<(std::ostream& os, const AnimeInspirationSource& ais){
 }
 
 
-AnimeInspirationSource:: ~AnimeInspirationSource() {
-    std::cout << "Destructor AnimeInspirationSource\n";
+int AnimeInspirationSource::getId() const {
+    return id;
 }
+
 

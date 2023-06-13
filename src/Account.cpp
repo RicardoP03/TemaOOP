@@ -17,20 +17,17 @@ Account::Account(const std::string& name_, const std::string& password_):name{na
     salt = make_salt();
     password = Account::hash_password(password, salt);
     accounts.insert(name);
-    std::cout << "Contul a fost creat cu succes\n";
 }
 
-Account::Account(const Account& other): name{other.name}, password{other.password}, logged{other.logged}{
-    std::cout << "Constructor copiere cont\n";
-}
 
 Account& Account::operator=(const Account& other){
     name = other.name;
     password = other.password;
     logged = other.logged;
-    std::cout << "operator= Account\n";
+    salt = other.salt;
     return *this;
 }
+
 
 std::ostream& operator<<(std::ostream& os, const Account& ac){
     os << "Numele contului este: " << ac.name << "\n";
@@ -42,10 +39,6 @@ void Account::afisare(std::ostream& os) const{
     os << "Numele contului este: " << name << "\n";
 }
 
-
-Account::~Account(){
-    std::cout<< "Contul a fost sters\n";
-}
 
 void Account::add_review(Season& se, const int& rating){
     if(!logged){

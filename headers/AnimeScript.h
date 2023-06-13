@@ -12,12 +12,12 @@ class AnimeScript: public AnimeInspirationSource  {
 private:
     int nrPages, avgWordsPerPage;
 public:
+    AnimeScript() = default;
     AnimeScript(const std::string& name_, const std::string& author_,  const int & pages, const int& words);
-    AnimeScript(const AnimeScript& other);
+    AnimeScript(const AnimeScript& other) = default;
     AnimeScript &operator=(const AnimeScript& other);
     friend std::ostream &operator<<(std::ostream &os, AnimeScript &script);
-    ~AnimeScript() override;
-    [[nodiscard]] AnimeInspirationSource* clone() const override;
+    ~AnimeScript() override = default;
     [[nodiscard]] std::pair<int, int> getReadingTime(const unsigned int& parte) const override;
     [[nodiscard]] std::pair<int, int> getTotalReadingTime() const override;
 };

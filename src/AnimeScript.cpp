@@ -3,14 +3,8 @@
 
 AnimeScript::AnimeScript(const std::string& name_, const std::string& author_, const int& pages, const int& words):
              AnimeInspirationSource(name_, author_), nrPages(pages), avgWordsPerPage(words){
-    std::cout << "Scenariul a fost creata\n";
 }
 
-
-AnimeScript::AnimeScript(const AnimeScript& other): AnimeInspirationSource(other),
-    nrPages(other.nrPages), avgWordsPerPage(other.avgWordsPerPage){
-    std::cout << "Constructor de copiere Novel\n";
-}
 
 
 AnimeScript& AnimeScript::operator=(const AnimeScript& other){
@@ -26,17 +20,9 @@ AnimeScript& AnimeScript::operator=(const AnimeScript& other){
 std::ostream &operator<<(std::ostream &os, AnimeScript &script) {
     script.afisare(os, "Script");
     std::cout << "Scenariul are " << script.nrPages << " pagini\n";
+    std::cout << "Parcurgerea scenariul are dura intre " <<
+        script.getTotalReadingTime().first << " si " << script.getTotalReadingTime().second << "\n";
     return os;
-}
-
-
-AnimeScript::~AnimeScript() {
-    std::cout << "Scenariul a fost sters\n";
-}
-
-
-AnimeInspirationSource* AnimeScript::clone() const {
-    return new AnimeScript(*this);
 }
 
 

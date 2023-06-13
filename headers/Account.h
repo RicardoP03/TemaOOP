@@ -17,11 +17,12 @@ protected:
     void afisare(std::ostream& os) const;
     bool logged = false;
 public:
+    Account() = default;
     Account(const std::string& name_, const std::string& password_);
-    Account(const Account& other);
+    Account(const Account& other) = default;
     Account &operator=(const Account& other);
     friend std::ostream& operator<<(std::ostream& os, const Account& ac);
-    virtual ~Account();
+    virtual ~Account() = default;
     [[nodiscard]] virtual std::string getPermissions() const = 0;
     void add_review(Season& se, const int& rating);
     void logIn(const std::string& name_, const std::string& password_);

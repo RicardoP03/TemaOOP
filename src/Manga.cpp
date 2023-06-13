@@ -2,19 +2,16 @@
 #include <cmath>
 
 Manga::Manga(const std::string &name_, const std::string& author_, const std::string& illustrator_, const std::string& artStyle_):
-    AnimeInspirationSource(name_, author_), illustrator(illustrator_), artStyle(artStyle_){
-    std::cout << "Seria Manga a fost creata\n";
-}
+    AnimeInspirationSource(name_, author_), illustrator(illustrator_), artStyle(artStyle_){}
 
-Manga::Manga(const Manga& other): AnimeInspirationSource(other), illustrator(other.illustrator), artStyle(other.artStyle){
-    std::cout << "Constructor de copiere Manga\n";
-}
 
 Manga& Manga::operator=(const Manga& other){
     if(this != &other){
         AnimeInspirationSource::operator=(other);
         illustrator = other.illustrator;
         artStyle = other.artStyle;
+        chapters = other.chapters;
+        chapterDetails = other.chapterDetails;
     }
     return *this;
 }
@@ -28,11 +25,11 @@ std::ostream& operator<<(std::ostream& os, Manga& mg){
         os << "Capitolul " << i + 1 << ": " << mg.chapters[i] << "\n";
         os << "Capitolul are " << mg.chapterDetails[i].first << " pagini si " << mg.chapterDetails[i].second << " panele\n";
     }
+    std::cout << "Parcurgerea seriei manga are dura intre " <<
+              mg.getTotalReadingTime().first << " si " << mg.getTotalReadingTime().second << "\n";
     return os;
 }
-Manga::~Manga(){
-    std::cout << "Seria Manga a fost stearsa\n";
-}
+
 
 void Manga::addContent(const std::string& nume_, const int& pagini, const int& panele) {
     chapters.push_back(nume_);
@@ -57,10 +54,4 @@ std::pair<int, int> Manga::getTotalReadingTime() const {
         aux.second += getReadingTime(i + 1).second;
     }
     return aux;
-}
-
-
-
-AnimeInspirationSource* Manga::clone() const{
-    return new Manga(*this);
 }
