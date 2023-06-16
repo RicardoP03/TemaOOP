@@ -16,7 +16,7 @@ void Meniu::start() {
     std::cout << "Pentru a va audentifica intr-un cont apsati tasta A \n";
     std::cout << "Pentru a creea un cont apsati tasta C\n";
     std::cout << "Pentru inchiderea programului apasati tasta D\n";
-    char c;
+    char c = 'D';
     std::cin >> c;
     if(c == 'A' || c == 'a') return logIn();
     if(c == 'C' || c == 'c') return createAccount();
@@ -43,7 +43,7 @@ void Meniu::logIn() {
         std::cout << "Error: " << e.what() << "\n";
         std::cout << "Pentru a va intoarce la meniu de logare apasati L\n";
         std::cout << "Pentru a va intoarce la meniu principal apasati P\n";
-        char c;
+        char c = 'P';
         std::cin >> c;
         if(c == 'L' || c == 'l') return logIn();
         else return start();
@@ -66,7 +66,7 @@ void Meniu::createAccount() {
         std::cout << "Error: " << e.what() << "\n";
         std::cout << "Pentru a va intoarce la meniu de creare apasati L\n";
         std::cout << "Pentru a va intoarce la meniu principal apasati P\n";
-        char c;
+        char c = 'P';
         std::cin >> c;
         if(c == 'L' || c == 'l') return createAccount();
         else return start();
@@ -117,7 +117,6 @@ void Meniu::getSeasons() {
             std::cout << "Sezonul cu id-ul: " << id << " nu exista\n";
         }
     }
-
 }
 
 
@@ -228,7 +227,7 @@ void Meniu::meniuUser(User& u) {
     std::cout <<"Pentru a adauga o recenzie introduceti tasta Z\n";
     std::cout <<"Pentru afisarea permisiunilor intrdouceti tasta U\n";
     std::cout <<"Pentru a va deconecta introduceti tasta D\n";
-    char c;
+    char c = 'D';
     std::cin >> c;
     if(c == 'E' || c == 'e') return getEpisodes();
     if(c == 'S' || c == 's') return getSeasons();
@@ -270,7 +269,7 @@ void Meniu::addContent(Admin& a) {
     std::cout << "Pentru a adauga o serie manga nou apasati tasta M\n";
     std::cout << "Pentru a adauga un roman nou apasati tasta R\n";
     std::cout << "Pentru a adauga un scenariu nou apasati tasta C\n";
-    char c;
+    char c = 'E';
     std::cin >> c;
     if(c == 'E' || c == 'e'){
         auto e = readContent<Episode>();
@@ -325,10 +324,10 @@ void Meniu::addContent(Admin& a) {
 
 void Meniu::addEpisodeSeason(Admin &a) {
     std::cout << "Doriti sa folositi o completare automata? Introduceti tasta D/N\n";
-    char c;
+    char c = 'D';
     std::cin >> c;
     if(c == 'D' || c == 'd'){
-        char n, d;
+        char n = 'N', d = 'N';
         int nr, ids;
         std::cout << "Doriti sa intrdouceti numele? Introduceti tasta D/N\n";
         std:: cin >> n;
@@ -432,7 +431,7 @@ void Meniu::addChapter(Admin &a) {
     else std::cout << "Seria manga cu id-ul " << idm << " nu exista\n";
 
     std::cout << "Pentru a va intoarce la meniul de admin introduceti orice tasta\n";
-    char c;
+    char c = 'a';
     std::cin >> c;
     return meniuAdmin(a);
 
@@ -458,7 +457,7 @@ void Meniu::addVolum(Admin &a) {
     else std::cout << "Romanul cu id-ul " << idr << " nu exista\n";
 
     std::cout << "Pentru a va intoarce la meniul de admin introduceti orice tasta\n";
-    char c;
+    char c = 'a';
     std::cin >> c;
     return meniuAdmin(a);
 
@@ -486,7 +485,7 @@ void Meniu::addSeasonAnime(Admin &a) {
     }
     else std::cout << "Id-ul sezonului/animeul nu exista\n";
     std::cout << "Pentru a va intoarce la meniul de admin introduceti orice tasta\n";
-    char c;
+    char c = 'a';
     std::cin >> c;
     return meniuAdmin(a);
 }
@@ -506,7 +505,7 @@ void Meniu::meniuAdmin(Admin &a) {
     std::cout <<"Pentru a adauga un volum la un roman introduceti tasta V\n";
     std::cout <<"Pentru afisarea permisiunilor intrdouceti tasta U\n";
     std::cout <<"Pentru a va deconecta introduceti tasta D\n";
-    char c;
+    char c = 'D';
     std::cin >> c;
     if(c == 'E' || c == 'e') return getEpisodes();
     if(c == 'S' || c == 's') return getSeasons();
