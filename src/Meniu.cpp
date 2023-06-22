@@ -46,7 +46,6 @@ void Meniu::logIn() {
         char c = 'P';
         std::cin >> c;
         if(c == 'L' || c == 'l') return logIn();
-        else return start();
     }
 }
 
@@ -69,7 +68,6 @@ void Meniu::createAccount() {
         char c = 'P';
         std::cin >> c;
         if(c == 'L' || c == 'l') return createAccount();
-        else return start();
     }
 }
 

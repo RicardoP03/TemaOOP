@@ -25,7 +25,7 @@ env:
   EXECUTABLE_NAME: "oop"
   INPUT_FILENAME: "tastatura.txt"
   BUILD_DIR: "build"
-  EXT_DIR: "ext"
+  EXT_DIR: "../../digestpp"
   BIN_DIR: "bin"
 
 defaults:
@@ -60,7 +60,6 @@ jobs:
                    --project="${BUILD_DIR}"/compile_commands.json \
                    -i"${BUILD_DIR}" --suppress='*:"${BUILD_DIR}"/*' \
                    -i"${EXT_DIR}" --suppress='*:"${EXT_DIR}"/*' \
-                   -i"../../digestpp" --suppress='*:"../../digestpp"/*' \
                    --suppress=missingIncludeSystem \
                    --suppress=unmatchedSuppression \
                    --suppress=useStlAlgorithm \
