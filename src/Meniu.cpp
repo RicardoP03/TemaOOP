@@ -41,8 +41,8 @@ void Meniu::logIn() {
     }
     catch(const std::exception& e){
         std::cout << "Error: " << e.what() << "\n";
-        std::cout << "Pentru a va intoarce la meniu de logare apasati L\n";
-        std::cout << "Pentru a va intoarce la meniu principal apasati P\n";
+        std::cout << "Pentru a va intoarce la meniu de logare introduceti tasta L\n";
+        std::cout << "Pentru a va intoarce la meniu principal introduceti tasta P\n";
         char c = 'P';
         std::cin >> c;
         if(c == 'L' || c == 'l') return logIn();
@@ -63,8 +63,8 @@ void Meniu::createAccount() {
     }
     catch(const std::exception& e){
         std::cout << "Error: " << e.what() << "\n";
-        std::cout << "Pentru a va intoarce la meniu de creare apasati L\n";
-        std::cout << "Pentru a va intoarce la meniu principal apasati P\n";
+        std::cout << "Pentru a va intoarce la meniu de creare introduceti tasta L\n";
+        std::cout << "Pentru a va intoarce la meniu principal introduceti tasta P\n";
         char c = 'P';
         std::cin >> c;
         if(c == 'L' || c == 'l') return createAccount();
