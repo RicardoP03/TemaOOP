@@ -38,7 +38,7 @@ void Manga::addContent(const std::string& nume_, const int& pagini, const int& p
 
 
 std::pair<int, int> Manga::getReadingTime(const unsigned int& parte) const {
-    if(parte < 1 && parte > chapterDetails.size()){
+    if(parte < 1 || parte > chapterDetails.size()){
         std::cout << "Capitolul nu exista\n";
         return {0, 0};
     }

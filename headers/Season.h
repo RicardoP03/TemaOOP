@@ -35,9 +35,9 @@ public:
 class SeasonEpiosdeFactory{
 public:
     static void addEpisodes(Season &s, const unsigned int& nr);
-    static void addEpisodesNames(Season& s, std::vector<std::string>& names);
-    static void addEpisodesDuration(Season& s, std::vector<int>& durations);
-    static void addEpisodesNamesDuration(Season& s, std::vector<std::string>& names, std::vector<int>& durations);
+    static void addEpisodesNames(Season& s, const std::vector<std::string>& names);
+    static void addEpisodesDuration(Season& s, const std::vector<int>& durations);
+    static void addEpisodesNamesDuration(Season& s, const std::vector<std::string>& names, const std::vector<int>& durations);
 };
 
 

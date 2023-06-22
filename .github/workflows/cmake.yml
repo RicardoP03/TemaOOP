@@ -25,7 +25,7 @@ env:
   EXECUTABLE_NAME: "oop"
   INPUT_FILENAME: "tastatura.txt"
   BUILD_DIR: "build"
-  EXT_DIR: "../../digestpp"
+  EXT_DIR: "digestpp"
   BIN_DIR: "bin"
 
 defaults:

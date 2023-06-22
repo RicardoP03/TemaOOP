@@ -35,7 +35,7 @@ void Novel::addContent(const std::string& nume, const std::string& editor, const
 
 
 std::pair<int, int> Novel::getReadingTime(const unsigned int& parte) const{
-    if(parte < 1 && parte > bookDetails.size()){
+    if(parte < 1 || parte > bookDetails.size()){
         std::cout << "Volumul nu exista\n";
         return {0, 0};
     }

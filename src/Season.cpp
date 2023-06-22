@@ -90,7 +90,7 @@ void SeasonEpiosdeFactory::addEpisodes(Season &s, const unsigned int &nr) {
 }
 
 
-void SeasonEpiosdeFactory::addEpisodesNames(Season &s, std::vector<std::string> &names) {
+void SeasonEpiosdeFactory::addEpisodesNames(Season &s, const std::vector<std::string> &names) {
     unsigned int nr = names.size();
     for(unsigned int i = 0; i < nr; i++){
         auto* ep = new Episode(names[i], 24);
@@ -99,7 +99,7 @@ void SeasonEpiosdeFactory::addEpisodesNames(Season &s, std::vector<std::string> 
 }
 
 
-void SeasonEpiosdeFactory::addEpisodesDuration(Season &s, std::vector<int> &durations) {
+void SeasonEpiosdeFactory::addEpisodesDuration(Season &s, const std::vector<int> &durations) {
     unsigned int nr = durations.size();
     for(unsigned int i = 0; i < nr; i++){
         auto* ep = new Episode("Episode", durations[i]);
@@ -108,7 +108,7 @@ void SeasonEpiosdeFactory::addEpisodesDuration(Season &s, std::vector<int> &dura
 }
 
 
-void SeasonEpiosdeFactory::addEpisodesNamesDuration(Season &s, std::vector<std::string> &names, std::vector<int> &durations) {
+void SeasonEpiosdeFactory::addEpisodesNamesDuration(Season &s, const std::vector<std::string> &names, const std::vector<int> &durations) {
     unsigned int nr = names.size();
     for(unsigned int i = 0; i < nr; i++){
         auto* ep = new Episode(names[i], durations[i]);
