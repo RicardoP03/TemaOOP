@@ -119,12 +119,7 @@ set_custom_stdlib_and_sanitizers(${PROJECT_NAME} true)
 #target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE ${<SomeLib>_SOURCE_DIR}/include)
 #target_link_directories(${PROJECT_NAME} PRIVATE ${<SomeLib>_BINARY_DIR}/lib)
 #target_link_libraries(${PROJECT_NAME} <SomeLib>)
-include_directories(${CMAKE_SOURCE_DIR}/digestpp)
-target_sources(${PROJECT_NAME}
-        PRIVATE
-        ${CMAKE_SOURCE_DIR}/digestpp/digestpp.hpp
-        ${CMAKE_SOURCE_DIR}/digestpp/hasher.hpp
-        )
+target_include_directories(${PROJECT_NAME} SYSTEM PRIVATE digestpp)
 
 ###############################################################################
 
