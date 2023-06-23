@@ -267,7 +267,7 @@ void Meniu::addContent(Admin& a) {
     std::cout << "Pentru a adauga o serie manga nou apasati tasta M\n";
     std::cout << "Pentru a adauga un roman nou apasati tasta R\n";
     std::cout << "Pentru a adauga un scenariu nou apasati tasta C\n";
-    char c = 'E';
+    char c = 'C';
     std::cin >> c;
     if(c == 'E' || c == 'e'){
         auto e = readContent<Episode>();
@@ -302,7 +302,7 @@ void Meniu::addContent(Admin& a) {
     else if(c == 'M' || c == 'm'){
         auto m = readContent<Manga>();
         mangas[m.getId()] = m;
-        std::cout << "Seria Manga a fost adaugat\n";
+        std::cout << "Seria Manga a fost adaugata\n";
     }
     else if(c == 'R' || c == 'r'){
         auto n = readContent<Novel>();
@@ -578,10 +578,10 @@ T Meniu::readContent() {
         std::cout << "Introduceti datele sursei:\n";
         return Anime<AnimeScript>(name, readContent<AnimeScript>());
     }
-    std::cout << "Introduceti autorul: ";
-    std::string author;
-    std::cin >> author;
     if constexpr (std::is_same<T, Manga>::value){
+        std::cout << "Introduceti autorul: ";
+        std::string author;
+        std::cin >> author;
         std::cout << "Introduce-i ilustratorul: ";
         std::string ilust;
         std::cin  >> ilust;
@@ -591,9 +591,15 @@ T Meniu::readContent() {
         return Manga(name, author, ilust, artstyle);
     }
     if constexpr (std::is_same<T, Novel>::value) {
+        std::cout << "Introduceti autorul: ";
+        std::string author;
+        std::cin >> author;
         return Novel(name, author);
     }
     if constexpr (std::is_same<T, AnimeScript>::value) {
+        std::cout << "Introduceti autorul: ";
+        std::string author;
+        std::cin >> author;
         std::cout << "Introduceti numarul de pagini: ";
         int nrpg;
         std::cin >> nrpg;
