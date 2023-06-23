@@ -1,4 +1,4 @@
-#include "../digestpp/digestpp.hpp"
+#include <digestpp.hpp>
 #include "../headers/Account.h"
 #include "../headers/Exception.h"
 

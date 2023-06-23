@@ -1,7 +1,3 @@
-//
-// Created by Ricardo ROG on 5/19/2023.
-//
-
 #ifndef OOP_EXCEPTION_H
 #define OOP_EXCEPTION_H
 #include <stdexcept>
