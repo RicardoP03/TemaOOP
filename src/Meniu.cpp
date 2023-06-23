@@ -563,22 +563,22 @@ T Meniu::readContent() {
         std::cin >> duration;
         return Episode(name, duration);
     }
-    if constexpr (std::is_same<T, Season>::value){
+    else if constexpr (std::is_same<T, Season>::value){
         return Season(name);
     }
-    if constexpr (std::is_same<T, Anime<Manga>>::value){
+    else if constexpr (std::is_same<T, Anime<Manga>>::value){
         std::cout << "Introduceti datele sursei:\n";
         return Anime<Manga>(name, readContent<Manga>());
     }
-    if constexpr (std::is_same<T, Anime<Novel>>::value) {
+    else if constexpr (std::is_same<T, Anime<Novel>>::value) {
         std::cout << "Introduceti datele sursei:\n";
         return Anime<Novel>(name, readContent<Novel>());
     }
-    if constexpr (std::is_same<T, Anime<AnimeScript>>::value) {
+    else if constexpr (std::is_same<T, Anime<AnimeScript>>::value) {
         std::cout << "Introduceti datele sursei:\n";
         return Anime<AnimeScript>(name, readContent<AnimeScript>());
     }
-    if constexpr (std::is_same<T, Manga>::value){
+    else if constexpr (std::is_same<T, Manga>::value){
         std::cout << "Introduceti autorul: ";
         std::string author;
         std::cin >> author;
@@ -590,13 +590,13 @@ T Meniu::readContent() {
         std::cin  >> artstyle;
         return Manga(name, author, ilust, artstyle);
     }
-    if constexpr (std::is_same<T, Novel>::value) {
+    else if constexpr (std::is_same<T, Novel>::value) {
         std::cout << "Introduceti autorul: ";
         std::string author;
         std::cin >> author;
         return Novel(name, author);
     }
-    if constexpr (std::is_same<T, AnimeScript>::value) {
+    else if constexpr (std::is_same<T, AnimeScript>::value) {
         std::cout << "Introduceti autorul: ";
         std::string author;
         std::cin >> author;
@@ -608,6 +608,5 @@ T Meniu::readContent() {
         std::cin >> nrcuv;
         return AnimeScript(name, author, nrpg, nrcuv);
     }
-
-    return T();
+    else return T();
 }
